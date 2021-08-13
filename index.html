@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <!--
 	Web hosting by Alojare
@@ -9,18 +8,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="Alojar&eacute;, https://www.alojare.com" />
 		<meta name="author" content="Djem Guerreru Inc, https://www.djemguerreru.com" />
-		<title>BBSToken [BBST] - BBS Coin as a Token</title>
+		<title>BBSToken [BBST] - Token Swap</title>
 		<meta name="keywords" content="" />
-		<meta name="description" content="" />
+		<meta name="description" content="BBSToken DApp" />
 		<meta property="og:site_name" content="BBSToken [BBST]"/>
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://bbstoken.click/" />
-		<meta property="og:title" content="BBS Coin as a Token"/>
+		<meta property="og:url" content="https://www.bbstoken.click/" />
+		<meta property="og:title" content="BBSToken Dapp"/>
 		<meta property="og:description" content="" />
-		<meta property="og:image:secure_url" content="" />
-		<meta property="og:image:alt" content="Website Logo" />
+		<meta property="og:image:secure_url" content="https://dapp.bbstoken.click/static/content/100/1000/10001/bbstoken.click/bbstoken.png" />
+		<meta property="og:image:alt" content="BBSToken Logo" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="canonical" href="https://bbstoken.click/">
+		<link rel="canonical" href="https://www.bbstoken.click/">
 		<link rel="stylesheet" href="/css/bootstrap.css">
 		<link rel="stylesheet" href="/css/alojare.css">
 		<style>
@@ -31,7 +30,7 @@
 	<body class="is-preload">
 
 <nav class="navbar navbar-expand-md navbar-light container-w border-info" style="background-color: #A6CCE8;">
-  <a class="navbar-brand" href="/#">
+  <a class="navbar-brand" href="https://www.bbscoin.click/token">
     <img src="/images/bbstoken.png" height="60" class="d-inline-block align-top" alt="BBS Token" title="BBS Token">
     <h1 style="display:none;"> BBS Token </h1>
 
@@ -44,35 +43,19 @@
       <li class="nav-item d-block d-md-none">
         <hr>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/#bbstoken"><b>Tokens</b></a>
+      <li class="nav-item d-none">
+        <a class="nav-link" href="https://www.bbscoin.click/token"><b>BBSToken</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/#roadmap"><b>Road Map</b></a>
+      <li class="nav-item d-none">
+        <a class="nav-link" data-toggle="modal" data-target="#myLogin"><b>Login</b></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://bbscoin.click/" target="_blank"><b>BBSCoin</b></a>
-      </li>
-      <li class="nav-item d-none d-md-block">
-        <b class="nav-link">|</b>
+      <li class="nav-item d-none">
+        <a class="nav-link" data-toggle="modal" data-target="#myRegister"><b>Register</b></a>
       </li>
       <li class="nav-item d-block d-md-none">
         <hr>
       </li>
-
       <li class="nav-item">
-        <b class="nav-link">WhitePaper(s):</b>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/wp/BBSCoin_v1.0.0.pdf" target="_blank"><b>BBSCoin WP</b></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/wp/BBSToken_Swap-Freeze_Platform_v1.0.0.pdf" target="_blank"><b>BBSToken WP</b></a>
-      </li>
-      <li class="nav-item d-block d-md-none">
-        <hr>
-      </li>
-      <!-- li class="nav-item">
         <a class="nav-link" href="https://t.me/bbstoken" target="_blank"><b><i class="fab fa-telegram"></i> Telegram</b></a>
       </li>
       <li class="nav-item">
@@ -83,390 +66,563 @@
       </li>
       <li class="nav-item d-block d-md-none">
         <hr>
-      </li -->
+      </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
-            <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#myLogin"><b>Login</b></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#myRegister"><b>Register</b></a>
-      </li>
-
+      
     </ul>
   </div>
 </nav>
 
 <!-- Intro -->
 
-<section id="bbstoken/token1" data-template="bbstoken/token" data-style="1" data-position="1" class="py-5">
+<section id="bbstoken/dapp/dapp1" data-template="bbstoken/dapp/dapp" data-style="1" data-position="1" class="py-2">
   <div class="container">
 
-    <div class="bg-white">
+    <div class="bg-white justify-content-center">
 
-      <!-- div class="row m-0 justify-content-center" -->
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active py-3" id="nav-wallet-tab" data-toggle="tab" href="#nav-wallet" role="tab" aria-controls="nav-wallet" aria-selected="true"><b><i class='fa fa-wallet'></i> Wallets</b></a>
+    <a class="nav-item nav-link disabled py-3" id="nav-bbstoken-tab" data-toggle="tab" href="#nav-bbstoken" role="tab" aria-controls="nav-bbstoken" aria-selected="false"><b><i class='fa fa-random'></i> Convert</b></a>
+    <!-- a class="nav-item nav-link disabled py-3" id="nav-bbscoin-tab" data-toggle="tab" href="#nav-bbscoin" role="tab" aria-controls="nav-bbscoin" aria-selected="false"><b><i class='fa fa-exchange-alt'></i> DEX</b></a -->
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
 
-        <!-- div class="col-20 gallery" style="background-image:url('');" title="" -->
-        <!-- div><img src="/images/bbstoken.png" class="d-inline-block align-top" alt="BBSToken" title="BBSToken"></div -->
-	    <!-- /div -->
+<div class="tab-pane fade show active p-0" id="nav-wallet" role="tabpanel" aria-labelledby="nav-wallet-tab">
 
-        <!-- div class="row col-20">
-          <div class="col-5">
-            <img class="col-20" src="/images/bbscoin.png" alt="BBSToken" title="BBSToken">
+
+  <div class="accordion" id="wallets">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <b><i class='fa fa-globe'></i> Tronlink</b>
+          </button>
+        </h2>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#wallets">
+        <div class="card-body">
+          <!-- h5 class="card-title text-success"></h5 -->
+          <div class=""><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+            <div id="tronit" class="pt-1 px-0"></div>
+            <div id="tokenBalance" class="p-0"></div>
+            <div id="tokenExtra" class="pb-1 px-1"></div>
           </div>
-          <div class="col-10 p-0 m-0 gallery-bg text-center" --><!--  style="background-image:url('/images/connector.png');"  -->
-            <!-- img class="col-20" valign="middle" src="/images/connector.png" alt="BBSToken" title="BBSToken">
+        </div>
+      </div>
+    </div>
+    <div class="card mb-5">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <b><i class='fa fa-globe'></i> BBSCoin</b>
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#wallets">
+        <div class="card-body">
+          <!-- h5 class="card-title text-dark"></h5 -->
+          <div class="col-20 m-0 p-0"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+            <div id="bbs" class="pb-3 pt-1 px-0 text-center" style="word-wrap: break-word;"></div>
+            <div id="bbsbalance" class="pb-1 pt-3 border-top mb-5"></div>
           </div>
-          <div class="col-5">
-            <img class="col-20" src="/images/tron.png" alt="BBSToken" title="BBSToken">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tab-pane fade d-none" id="nav-bbstoken" role="tabpanel" aria-labelledby="nav-bbstoken-tab">
+
+    <h5 class="card-title text-info text-center py-4">BBSToken <i class='fa fa-random'></i> Wrapped BBSToken</h5><!-- exchange-alt -->
+    <div class="card col-20 alert alert-info mb-5"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+      <div id="bbst" class="pt-1 px-0 pb-2 border-bottom"><h6><b>PLEASE SELECT A CONVERSION:</b></h6></div>
+
+      <div id="bbstbalance" class="pb-1 px-1">
+        <form id="swapToken" class="py-1">
+          <div class="form-group row">
+            <label class="col-form-label font-weight-bold pt-1"><input type="radio" id="bbstRadio" name="tokenSelect" value="bbst"> BBST <i class='fas fa-arrow-right'></i> WBBS [ 1:1 ]</label>
+            <div id="bbstSwap" class="col-20 text-right pb-1">BBST</div>
+            <label class="col-form-label font-weight-bold pt-1"><input type="radio" id="wbbsRadio" name="tokenSelect" value="wbbs"> WBBS <i class='fas fa-arrow-right'></i> BBST [ 1:1 ]</label>
+            <div id="wbbsSwap" class="col-20 text-right pb-1">WBBS</div>
+            <!-- label class="col-form-label font-weight-bold pt-1"><input type="radio" id="bbstRadio" name="tokenSelect" value="bbst" disabled> BBST <i class='fas fa-arrow-right'></i> BBSCoin [ 1:1 ] (Soon)</label>
+            <div id="bbsSwap" class="col-20 text-right pb-1">0 BBS</div -->
+            <div class="col-sm-10 border-top">
+              <label class="col-form-label font-weight-bold">AMOUNT TO CONVERT:</label>
+              <input type="number"  class="form-control " name="inputTokens" id="inputTokens" placeholder="How many ?" disabled>
+              <!-- onKeyUp="btnEnable()" -->
+            </div>
           </div>
+          <div class="form-group row">
+            <div class="row col-20 justify-content-center border-top pt-4">
+              <button id="btnSwap" type="submit" class="btn btn-muted p-4 border border-dark" disabled><i class='fa fa-random'></i> CONVERT</button>
+            </div>
+          </div>
+        </form>
+      
+      </div>
+    </div>
+    <div id="transactionAlert" class="alert alert-primary" role="alert" style="display:none;"></div>
+
+</div>
+
+<div class="tab-pane fade d-none disabled" id="nav-bbscoin" role="tabpanel" aria-labelledby="nav-bbscoin-tab">
+
+    <h5 class="card-title text-success"></h5>
+    <div class="col-20 m-0 p-0"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+      <div id="bbs" class="pb-3 pt-1 px-0 text-center" style="word-wrap: break-word;"></div>
+      <div id="bbsbalance" class="pb-1 pt-3 border-top"></div>
+    </div>
+
+
+</div>
+
+</div>
+  <!-- p id="reference" class="card-text text-secondary">
+    <b>Price:</b> <br>
+  </p>
+  <hr style="color:#A6CCE8">
+  <p class="card-text text-secondary">
+    <form id="acquirer" class="py-1">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">BBST</label>
+        <div class="col-sm-10">
+          <input type="number" onKeyUp="multiply(this)" class="form-control" name="inputBBST" id="inputBBST" placeholder="How many BBST?" disabled>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-3 col-form-label">TOTAL (TRX)</label>
+        <div class="col-sm-10">
+          <input type="price" class="form-control" id="inputTotal" placeholder="Total TRX Display" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+          <div class="row col-sm-10 justify-content-center">
+            <button id="btnAcquire" type="submit" class="btn btn-primary" disabled>Acquire</button>
+          </div>
+        </div>
+      <div id="transactionAlert" class="alert alert-primary" role="alert" style="display:none;"></div>
+    </form>
+    </p -->
+        <!-- div class="alert alert-danger" role="alert">
+          NOTICE: Due to a calculation glitch in TronLink, transaction popups will say 1/10th of the ordered tokens (Ex. 10 will say 1 BBST, 100 will say 10 BBST, and so on). You will still receive the ordered amount.
         </div -->
-        <div class="card alert alert-white mt-4 py-5 mx-4">
-          <div class="row justify-content-center">
-            <div class="col-md-6 py-5 justify-content-center">
-              <img class="col-20" src="/images/bbstoken.png" alt="Bololex.com" title="Bololex.com">
-            </div>
-            <div class="col-md-10" role="alert">
-              <p><b>BBSToken</b> is BBSCoin on the Tron blockchain. BBSCoin is a cryptocurrency designed for exchanging virtual credits on websites and forums. BBSToken allows BBSCoin holders a bridge to the Tron network by swap-freezing BBSCoin for BBSToken.</p>
-              <p>BBSToken, while on a Tronlink wallet, gives the user portability to take them anywhere without a computer and the mobility to transfer their BBSTokens at any time from any location from where they can access the internet.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card alert alert-white mt-5 pt-4 mx-4">
-          <div class="row justify-content-center">
-            <div class="col-md-6 py-2 justify-content-center">
-              <a href="https://bololex.com/currency/info/BBST" target="_blank"><img class="col-20" src="/images/bololex-bg-white.jpg" alt="BBSToken on Bololex.com" title="BBSToken on Bololex.com"></a>
-            </div>
-            <div class="col-md-10" role="alert">
-              <p><b>BBSToken (<i>BBST</i>)</b> is listed on the Bololex Exchange. An airdrop of 110 Million BBST was completed after a successful listing. Thanks to all who supported the BBSToken listing on Bololex.</p>
-              <p>Bololex [ BBST-TRX ] <a href="https://bololex.com/trading?symbol=BBST-TRX" target="_blank">https://bololex.com/trading?symbol=BBST-TRX</a></p>
-              <p>Bololex [ BBST-USDT ] <a href="https://bololex.com/trading?symbol=BBST-USDT" target="_blank">https://bololex.com/trading?symbol=BBST-USDT</a></p>
-	    </div>
-          </div>
-        </div>
 
-        <div class="card alert alert-white mt-5 pt-4 mx-4">
-          <div class="row justify-content-center">
-            <div class="col-md-6 py-2 justify-content-center">
-              <a href="https://justswap.io/#/scan/detail/trx/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB" target="_blank"><img class="col-20" src="/images/justswap_logo.svg" alt="Wrapped BBSToken on JustSwap.io" title="Wrapped BBSToken on JustSwap.io"></a>
-            </div>
-            <div class="col-md-10" role="alert">
-              <p><b>Wrapped BBSToken(<i>WBBS</i>)</b> may be swapped on the JustSwap DEX. It is a decentralized exchange from the Tron Foundation which works by the use of blockchain contracts, this way the blockchain itself holds the tokens vs an exchange wallet..</p>
-              <p>JustSwap.io [ WBBS-TRX ] <a href="https://justswap.io/#/scan/detail/trx/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB" target="_blank">https://justswap.io/#/scan/detail/trx/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB</a></p>
-              <p>The main pair is TRX, but WBBS may be exchanged for any other asset that is on the JustSwap DEX like: USDT, WBTT, BTC, etc.</p>
-	    </div>
-          </div>
-        </div>
-
-        <div class="col-20 px-4 py-4">
-
-<div id="bbstoken" class="card border-info my-3" >
-  <div class="card-header"><b>BBSCoin <=> BBSToken (BBST)</b></div>
-  <div class="card-body text-secondary p-2">
-
-    <div class="alert alert-info" role="alert">
-      <h5 class="alert-heading"><img class="col-1" src="/images/bbstokenSQ.png" alt="BBSToken (BBST)" title="BBSToken (BBST)">BBSToken (BBST)</h5>
-      <p class="card-text">Bridging the BBSCoin community into the Tron network. BBSCoin holders will be able to swap-freeze coins for tokens, allowing them to reach more exchange markets beyond the usual Bitcoin and Litecoin markets that come with higher exchange requirements and fees. Unspent BBSTokens may be returned to unlock from the Frozen BBSCoins which may be withdrawn.</p>
-      <p class="card-text"> The BBSToken (BBST) was recorded as a TRC-10 token on the Tron Blockchain on: <i>2020-10-14 18:15:18 (UTC)</i><br>Token link on TronScan: <a href="https://tronscan.org/#/token/1003413" target="_blank">https://tronscan.org/#/token/1003413</a><br> <a href="https://www.bbscoin.click" target="_blank">BBSCoin</a> was created on 2018-01-17 as a cryptonote coin that is PoW mineable in Cryptonight Lite v7. </p>
-      <p class="card-text">The current unlocked supply of BBSToken (BBST) is 64.47 Billion BBSToken (BBST). Full supply is 184.47 Billion, the remainder 120 Billion are frozen/locked on the blockchain and will only be unlocked if circulation is needed. There are about <a href="https://www.bbscoin.click/statistics/" target="_blank">105.12 Billion BBSCoins</a> minted/circulating by mining and it will take about 2 more years of mining to reach 120 Billion since the mining reward reduces every day.</p>
-      <!-- p class="card-text">Because we would like to list BBST on exchanges beyond PoloniDex and to cover bandwidth/energy consuption on transactions, an amount of tokens has been put for aquisition to early adopters. </p -->
-    </div>
-    <div class="alert alert-info" role="alert">
-      <h5 class="alert-heading"><img class="col-1" src="/images/wrappedbbstokenSQ.png" alt="Wrapped BBSToken (BBST)" title="Wrapped BBSToken (BBST)">Wrapped BBSToken (WBBS)</h5>
-      <p class="card-text">
-      Wrapped BBSToken (WBBS) is an additional swap of BBSToken into a TRC-20 token, which may be used on the <a href="https://justswap.io/#/scan/detail/trx/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB" target="_new">JustSwap DEX</a> or any other DEX that may support TRC-20 tokens. You must use the DApp Browser or Discover inside Tronlink to open this website and connect Tronlink and use our DApp to swap BBST for WBBS (1:1), just find the [ Swap ] tab.
-      </p>
-      <p class="card-text"> The Wrapped BBSToken (WBBS) was recorded as a TRC-20 token on the Tron Blockchain on: <i>2020-10-15 22:39:53 (UTC)</i><br>Token link on TronScan: <a href="https://tronscan.org/#/token20/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB" target="_blank">https://tronscan.org/#/token20/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB</a></p>
-      <!-- p class="card-text">Because we would like to list BBST on exchanges beyond PoloniDex and to cover bandwidth/energy consuption on transactions, an amount of tokens has been put for aquisition to early adopters. </p -->
-    </div>
-    <div class="alert alert-warning" role="alert">
-      <p class="card-text"> <b>NOTICE:</b> When interacting with BBSTokens, please make sure you interact with the ones matching the IDs mentioned above (Token ID: 103413 and Contract: TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB).  If you were to find other BBSTokens on the Tron Network, please let us know by Joining our Telegram group: @bbstoken (link: <a href="https://t.me/bbstoken" target="_blank">https://t.me/bbstoken</a>)  </p>
-    </div>
+<!-- div id="tronlinkhow" class="card border-info mb-3" >
+  <div class="card-header"><b>How to open this page in <a href="https://tronlink.org" target="_blank"><img height="25px" src="/static/content/100/1000/10001/bbstoken.click/tronlink-small.png" alt="TronLink" title="Tronlink"></a> App ?</b></div>
+  <div class="card-body text-secondary">
+    <h5 class="card-title">Need to download TronLink ? <a href="https://tronlink.org" target="_blank">Click here to visit their website</a></h5>
+    <p class="card-text">On TronLink app, tap on [ Me ] -> [ Advanced Features ] -> [ DApp Browser ] -> Please enter the web link: [ bbstoken.click/bbst ] (->), it will load this page and enable it's wallet features allowing you to create an order.</p>
+    <hr style="color:#A6CCE8">
+    <p class="card-text text-center">
+    * Click on image to enlarge.<br>
+      <a href="/static/content/100/1000/10001/bbstoken.click/tronlinkapp1.png"><img class="col-md-4" src="/static/content/100/1000/10001/bbstoken.click/tronlinkapp1.png" alt="BBS Token" title="BBS Token"></a>
+      <a href="/static/content/100/1000/10001/bbstoken.click/tronlinkapp2.png"><img class="col-md-4" src="/static/content/100/1000/10001/bbstoken.click/tronlinkapp2.png" alt="BBS Token" title="BBS Token"></a>
+      <a href="/static/content/100/1000/10001/bbstoken.click/tronlinkapp3.png"><img class="col-md-4" src="/static/content/100/1000/10001/bbstoken.click/tronlinkapp3.png" alt="BBS Token" title="BBS Token"></a>
+      <a href="/static/content/100/1000/10001/bbstoken.click/tronlinkapp4.png"><img class="col-md-4" src="/static/content/100/1000/10001/bbstoken.click/tronlinkapp4.png" alt="BBS Token" title="BBS Token"></a>
+    </p>
   </div>
-</div>
-
-
-<div id="roadmap" class="card border-info my-4" >
-  <div class="card-header"><b>Road Map</b></div>
-  <div class="card-body text-secondary p-2">
-    <!-- h5 class="card-title">Secondary card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p -->
-
-    <!-- div class="alert alert-info" role="alert">
-      <h5 class="alert-heading">BBSToken Supply</h5>
-      <p class="card-text">The supply of BBSToken is equal to the supply of BBSCoin, which is 184.47 Billion. On BBSCoin about 103 Billion has been mined so far since January 2018, and the mining reward goes down every day by a fraction. On BBSToken, 120 Billion tokens were frozen until January 16, 2021 and cannot be unfrozen until then. It would take about 2 more years of mining to reach 120 Billion from the current mined circulation of 103 Billion. The available 64.47 Billion tokens are available for early adopters and get TRX to freeze for Bandwidth and Energy usage by transactions from token holders and any exchange listings.</p>
-      <hr>
-      <p class="mb-0">BBSCoin: [ <a href="https://www.bbscoin.click/statistics/#statistics" target="_blank">Insights/Statistics</a> ]</p>
-    </div -->
-
-    <div class="alert alert-info" role="alert">
-      <div class="row">
-      <div class="col-md-15">
-      <h5 class="alert-heading">Forum Websites Plugins/Addons</h5>
-      <p class="card-text">Updates to the plugins are expected to happen and completed within 3 months(End of April 2021).</p>
-      <p class="card-text">
-      BBSToken to be integrated into the plugins along with API documentation. New addons will be created to cover other popular platforms used for forums and websites.
-      </p>
-      </div></div>
-      <hr>
-      <p class="mb-0">Plugins/Addons: Current versions are only for <a href="https://bbscoin.click/ecosystem/#API" target="_blank">BBSCoin</a>, BBST Wallet Container to be developed.</p>
-      
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <div class="row">
-      <div class="col-md-15">
-      <h5 class="alert-heading">BBSToken Wallet Container</h5>
-      <p class="card-text">To complete the Plugins/Addons updates to include BBSToken, a wallet container for BBSToken must be developed, and will be designed to use the same commands as the BBSCoin Wallet container (walletd). This way the plugin will re-use the commands vs creating new ones and save content bytes and functions are also re-used. Will have to add a mode for running both BBSCoin and BBSToken, in the case some webmasters would like to do so.</p>
-      <p class="card-text">
-      
-      </p>
-      </div></div>
-      <hr>
-      <p class="mb-0">BBSToken Wallet Container: Under Engineering Design</p>
-      
-    </div>
-
-
-    <div class="alert alert-info" role="alert">
-      <div class="row">
-      <div class="col-md-15">
-      <h5 class="alert-heading">BBSToken Swap-Freeze Platform</h5>
-      <p class="card-text">The swap-freeze platform allows BBS holders to deposit BBSCoin to be swap-frozen to circulate BBSToken on a 1:1 ratio and be sent to their Tron wallet address. The BBSCoin will stay swap-frozen on the platform while the user holds/spends BBSTokens. Any BBSToken may be able to return deposite and withdraw BBSCoin back to a BBS wallet. When BBSToken is returned, the BBSToken is uncirculated.</p>
-      <p class="card-text">
-      [ BBSCoin ] ---> [ Platform ] ---> [ BBSToken ] <b class="text-success">COMPLETED</b><br>
-      [ BBSToken ] ---> [ Platform ] ---> [ BBSCoin ] <b class="text-warning">NEXT FEATURE</b> <i class="text-info">(Under construction and testing.)</i>
-      </p>
-      <p class="card-text">How will it work?<br>
-      Create an account on the platform by using the Register link on the top mene and make sure to insert your token address where asked.  The Tron wallet address must be of an activated one. You will receive a unique BBSCoin address to make deposits of BBSCoin to it. When deposited, the platform will send you the equivalent amount(1:1) in BBSToken to your recorded Tron Wallet address when the BBSCoin transaction is confirmed on the blockchain. When you return BBSTokens, to the BBSToken main wallet which will appear on the platform, the equivalent amount of BBSCoin is unlocked and you may withdraw it to a BBSCoin Wallet. The main wallet uncirculates the tokens automatically.</p>
-      </div>
-      <div class="col-md-5 p-1"><img class="col-20 text-left" src="/images/bbstokenLogin.png" alt="BBSToken Platform Login" title="BBSToken Platform Login"></div>
-      </div>
-      <hr>
-      <p class="mb-0">Platform: Use the [ Login | Register ] links located on the menu at the top of page, or open this website "bbstoken.click" inside your Tronlink wallet.</p>
-      
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <div class="row">
-      <div class="col-md-5 p-1"><img class="col-20 text-left" src="/images/bbstokenDAppSwap.png" alt="BBSToken Swap on DApp" title="BBSToken Swap on DApp"></div>
-      <div class="col-md-15">
-        <h5 class="alert-heading">Wrapped BBSToken (WBBS)</h5>
-        <p class="card-text">As you may read on the [ BBSCoin <=> BBSToken (BBST) ] section above, the BBSToken(BBST) will deposit-freezed into the Wrapped BBSToken(WBBS) to mint and circulate the WBBS for use in JustSwap or other DEX that may support TRC-20 tokens. The DApp is hosted on this website, so that BBST holders may swap in and out for WBBS.</p>
-        <p class="card-text">When you need to swap back WBBS to withdraw BBST, the contract burns an equivalent amount of WBBS from your wallet, and returns the equivalent amount of BBST to your wallet.</p>
-        <p class="card-text">
-        [ BBSToken ]>---<[ DApp ]>---<[ Wrapped BBSToken ] <b class="text-success">COMPLETED</b>
-        </p>
-        <p class="card-text">There is no set Supply amount of Wrapped BBSTokens, there is only a matching which is equal to that of BBST deposited into the WBBS contract. This is why there is minting and burning of WBBS, so it only exists as an equal amount of deposited BBST and no extras are around.</p>
-        <hr>
-        <p class="mb-0">Wrapper: Open this website with Tronlink and go to the [ Swap ] tab after connecting it.</p>
-      </div>
-      </div>
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <div class="row">
-      <div class="col-md-15">
-
-      <h5 class="alert-heading">BBSCoin Mining</h5>
-      <p class="card-text">The mining pools allows you to acquire BBScoin by helping with the mining of the blocks that carry new transactions on the blockchain. You may send mined BBSCoin to your BBSCoin Wallet or direct deposit them to your BBSCoin wallet address from your BBSToken Swap Platform account and directly receive BBSToken on your Tron wallet address.</p>
-      <p class="card-text">
-      [ BBSCoin Pool ] ---> [ Platform ] ---> [ BBSToken ] <b class="text-success">COMPLETED</b>
-      </p>
-      <p class="card-text">If you prefer to have the separate BBSCoin wallet, you may download it from <a href="https://www.bbscoin.click/download/" target="_blank">bbscoin.click/download</a>. Please make sure to change it to use the remote node by going to: Settings -> Preferences -> Select: Remote Node, then enter node.bbscoin.click for host and 21204 for port, then click [ SAVE ], wait for it to finish saving, then restart the wallet software. Then you may go to a Mining Pool from the links below and to find the getting started instructions to follow (mining software download is required). 
-      </div>
-      <div class="col-md-5 p-1"><img class="col-20 text-left" src="/images/bbscoinMining.png" alt="BBSCoin Mining Snapshot" title="BBSCoin Mining Snapshot"></div>
-      </div>
-      <hr>
-      <p class="mb-0">Mining Pool(s): [&nbsp;<a href="https://pool.bbscoin.click" target="_blank">pool.bbscoin.click</a>&nbsp;] [&nbsp;<a href="https://bbscoin.my-mining-pool.de" target="_blank">bbscoin.my-mining-pool.de</a> ] [&nbsp;<a href="https://webbbs.semipool.com" target="_blank">webbbs.semipool.com</a>&nbsp;] [&nbsp;<a href="https://bbs.soloway.in.ua" target="_blank">bbs.soloway.in.ua</a>&nbsp;] [&nbsp;<a href="https://bbs.gonspool.com" target="_blank">bbs.gonspool.com</a>&nbsp;] </p>
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <h5 class="alert-heading">Exchanges</h5>
-      <p class="card-text">Below are the current listings of BBSToken, Wrapped BBSToken, and BBSCoin. We are pusuing other exchanges, and hope to add them to the list.</p>
-      <p class="card-text">
-        <div class="row justify-content-center">
-        <div class="col-md-6 border bg-white">
-          <b class="text-dark">BBSToken</b><br>
-          Bololex [ <a href="https://bololex.com/trading?symbol=BBST-TRX" target="_blank">BBST-TRX</a> ] <br>
-          <!-- Pursuing:<br> [ PoloniDEX ] [ LAToken ] [ TronTrade ] -->
-        </div>
-        <div class="col-md-6 border bg-white mx-md-3">
-          <b class="text-dark">Wrapped BBSToken</b><br>
-          JustSwap [ <a href="https://justswap.io/#/scan/detail/trx/TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB" target="_blank">WBBS-TRX</a> ] 
-        </div>
-        <div class="col-md-6 border bg-white">
-          <b class="text-dark">BBSCoin</b><br>
-          Crex24 [ <a href="https://crex24.com/exchange/BBS-BTC" target="_blank">BBS-BTC</a> ]<br>
-          TradeOgre [ <a href="https://tradeogre.com/exchange/BTC-BBS" target="_blank">BBS-BTC</a> ] [ <a href="https://tradeogre.com/exchange/LTC-BBS" target="_blank">BBS-LTC</a> ]
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
+</div -->
 
     </div>
     
       </div>
 
-<!-- link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" -->
-
-<div id="myLogin" class="modal fade" role="dialog">
-<div class="modal-dialog">
-
-<div class="modal-content">
-<div class="modal-header">
-<h4 class="modal-title">Platform Login:</h4>
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-</div>
-<div id="modalpop" class="modal-body align-center bg-light">
-<form id="loginForm" method="POST" action="https://platform.bbstoken.click/login.cgi" novalidate="novalidate">
-  <span class="col-20 help-block justify-content-center"><a href="https://dapp.bbstoken.click"><button type="button" class="btn btn-primary p-3">Login using TronLink</button></a></span><hr>
-                              <div class="form-group">
-                                  <label for="em" class="control-label">Email</label>
-                                  <input type="text" class="form-control" id="em" name="em" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="pw" class="control-label">Password</label>
-                                  <input type="password" class="form-control" id="pw" name="pw" value="" required="" title="Please enter your password">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div id="loginErrorMsg" class="alert alert-error hide"></div>
-                              <!-- div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" name="remember" id="remember"> Remember login
-                                  </label>
-                                  <p class="help-block">(if this is a private computer)</p>
-                              </div -->
-                              <button type="submit" class="btn btn-success btn-block">Login</button>
-                              <!-- a href="/forgot/" class="btn btn-default btn-block">Help to login</a -->
-                          </form>
-</div>
-<div class="modal-footer">
-<a class="nav-link" data-toggle="modal" data-target="#myPassword"><b>Need password reset?</b></a>
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
-
-<div id="myRegister" class="modal fade" role="dialog">
-<div class="modal-dialog">
-
-<div class="modal-content">
-<div class="modal-header">
-<h4 class="modal-title">Platform Registration:</h4>
-                            <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
-                            * All forms inputs are required. Account must be activated to be able to login with emailed code.
-                            </p>
-
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-</div>
-<div id="modalpop" class="modal-body align-center bg-light">
-<form id="loginForm" method="POST" action="https://platform.bbstoken.click/register.cgi" novalidate="novalidate">
-<span class="col-20 help-block justify-content-center"><a href="https://dapp.bbstoken.click"><button type="button" class="btn btn-primary p-3">Register using TronLink</button></a></span><hr>
-                              <div class="form-group">
-                                  <label for="em" class="control-label">E-mail</label>
-                                  <input type="text" class="form-control" id="em" name="em" value="" required="" title="Please enter a email" placeholder="example@gmail.com">
-                                  <span class="help-block">A valid email address is required to receive your activation code.</span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="tr" class="control-label">Tron / BBST wallet address*</label>
-                                  <input type="text" class="form-control" id="tr" name="tr" value="" required="" title="Please enter your Tron / BBST address" placeholder="example: TLV3mtPUq9AasuWSU54rozMZT4Zew32mV1">
-                                  <span class="help-block">A valid "ACTIVE" Tron / BBST deposit or receive address is required to receive BBSTokens. Please make sure you use copy paste and verify it is correct before submitting. Cannot be changed.</span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="pw" class="control-label">Password</label>
-                                  <input type="password" class="form-control" id="pw" name="pw" value="" required="" title="Please enter your password">
-                                  <span class="help-block">Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
-                              </div>
-                              <div id="registerErrorMsg" class="alert alert-error hide"></div>
-                              <button type="submit" class="btn btn-info btn-block">Register</button>
-                          </form>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
-
-<div id="myPassword" class="modal fade" role="dialog">
-<div class="modal-dialog">
-
-<div class="modal-content">
-<div class="modal-header">
-<h4 class="modal-title">Platform Password Reset:</h4>
-                            <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
-                            * All forms inputs are required. Account must be activated to be able to login with emailed code.
-                            </p>
-
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-</div>
-<div id="modalpop" class="modal-body align-center bg-light">
-<form id="loginForm" method="POST" action="https://platform.bbstoken.click/register.cgi" novalidate="novalidate">
-<input type="text" class="form-control invisible" id="tr" name="tr" value="NULL" required="" title="NULL" placeholder="NULL">
-<input type="text" class="form-control invisible" id="act" name="act" value="update" required="" title="update" placeholder="update">
-                              <div class="form-group">
-                                  <label for="em" class="control-label">E-mail</label>
-                                  <input type="text" class="form-control" id="em" name="em" value="" required="" title="Please enter a email" placeholder="example@gmail.com">
-                                  <span class="help-block">Your login email address.</span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="pw" class="control-label">Password</label>
-                                  <input type="password" class="form-control" id="pw" name="pw" value="" required="" title="Please enter your password">
-                                  <span class="help-block">Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
-                              </div>
-                              <div id="registerErrorMsg" class="alert alert-error hide"></div>
-                              <button type="submit" class="btn btn-info btn-block">Reset Password</button>
-                          </form>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
-
     </div>
   </div>
+
+
+  <div id="myLogin" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+    <div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title">Platform Login:</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div id="modalpop" class="modal-body align-center bg-light">
+    <form id="loginForm" method="POST" action="https://platform.bbstoken.click/login.cgi" novalidate="novalidate">
+      <span class="col-20 help-block justify-content-center"><button type="button" class="btn btn-primary p-3" onclick="getWalletAddress()">Login using TronLink</button></span><hr>
+                                  <div class="form-group">
+                                      <label for="em" class="control-label">Email</label>
+                                      <input type="text" class="form-control" id="em" name="em" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                      <span class="help-block"></span>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="pw" class="control-label">Password</label>
+                                      <input type="password" class="form-control" id="pw" name="pw" value="" required="" title="Please enter your password">
+                                      <span class="help-block"></span>
+                                  </div>
+                                  <div id="loginErrorMsg" class="alert alert-error hide"></div>
+                                  <!-- div class="checkbox">
+                                      <label>
+                                          <input type="checkbox" name="remember" id="remember"> Remember login
+                                      </label>
+                                      <p class="help-block">(if this is a private computer)</p>
+                                  </div -->
+                                  <button type="submit" class="btn btn-success btn-block">Login</button>
+                                  <!-- a href="/forgot/" class="btn btn-default btn-block">Help to login</a -->
+                              </form>
+    </div>
+    <div class="modal-footer">
+    <a class="nav-link" data-toggle="modal" data-target="#myPassword"><b>Need password reset?</b></a>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div id="myRegister" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+    <div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title">Platform Registration:</h4>
+                                <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
+                                * All forms inputs are required. Account must be activated to be able to login with emailed code.
+                                </p>
+    
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div id="modalpop" class="modal-body align-center bg-light">
+    <form id="registerForm" method="POST" action="https://platform.bbstoken.click/register.cgi" novalidate="novalidate">
+    <span class="col-20 help-block justify-content-center"><button type="button" class="btn btn-primary p-3" onclick="getWalletAddress()">Register using TronLink</button></span><hr>
+                                  <div class="form-group">
+                                      <label for="em" class="control-label">E-mail</label>
+                                      <input type="text" class="form-control" id="rem" name="em" value="" required="" title="Please enter a email" placeholder="example@gmail.com">
+                                      <span class="help-block">A valid email address is required to receive your activation code.</span>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="tr" class="control-label">Tron / BBST wallet address*</label>
+                                      <input type="text" class="form-control" id="rtr" name="tr" value="" required="" title="Please enter your Tron / BBST address" placeholder="example: TLV3mtPUq9AasuWSU54rozMZT4Zew32mV1">
+                                      <span class="help-block">A valid "ACTIVE" Tron / BBST deposit or receive address is required to receive BBSTokens. Please make sure you use copy paste and verify it is correct before submitting. Cannot be changed.</span>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="pw" class="control-label">Password</label>
+                                      <input type="password" class="form-control" id="rpw" name="pw" value="" required="" title="Please enter your password">
+                                      <span class="help-block">Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
+                                  </div>
+                                  <div id="registerErrorMsg" class="alert alert-error hide"></div>
+                                  <button type="submit" class="btn btn-info btn-block">Register</button>
+                              </form>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div id="myPassword" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+    <div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title">Platform Password Reset:</h4>
+                                <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
+                                * All forms inputs are required. Account must be activated to be able to login with emailed code.
+                                </p>
+    
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div id="modalpop" class="modal-body align-center bg-light">
+    <form id="resetForm" method="POST" action="https://platform.bbstoken.click/register.cgi" novalidate="novalidate">
+    <input type="text" class="form-control invisible" id="tr" name="ptr" value="NULL" required="" title="NULL" placeholder="NULL">
+    <input type="text" class="form-control invisible" id="act" name="act" value="update" required="" title="update" placeholder="update">
+                                  <div class="form-group">
+                                      <label for="em" class="control-label">E-mail</label>
+                                      <input type="text" class="form-control" id="pem" name="em" value="" required="" title="Please enter a email" placeholder="example@gmail.com">
+                                      <span class="help-block">Your login email address.</span>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="pw" class="control-label">Password</label>
+                                      <input type="password" class="form-control" id="ppw" name="pw" value="" required="" title="Please enter your password">
+                                      <span class="help-block">Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
+                                  </div>
+                                  <div id="registerErrorMsg" class="alert alert-error hide"></div>
+                                  <button type="submit" class="btn btn-info btn-block">Reset Password</button>
+                              </form>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+    </div>
 </section>
 
-    <!-- section id="footer" style="background-color:#FFFFFF" -->
-      <div class="container border-info" style="background-color:#A6CCE8" id="footer">
+
+  <!-- section id="footer" style="background-color:#FFFFFF" -->
+    <footer class="footer fixed-bottom">
+      <div class="container border-info" style="background-color:#A6CCE8">
         <div class="row col-20 justify-content-center">
-            <div class="navbar-expand" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <b class="nav-link"><i class="fas fa-satellite"></i> Follow&nbsp;Us:</b>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://t.me/bbstoken" target="_blank"><b><i class="fab fa-telegram"></i> Telegram</b></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://twitter.com/bbstoken" target="_blank"><b><i class="fab fa-twitter"></i> Twitter</b></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://www.facebook.com/groups/bbstoken" target="_blank"><b><i class="fab fa-facebook"></i> Facebook</b></a>
-              </li>
-            </ul>
-          </div> 
           <div class="text-center text-white p-3">
-		  	2020 - 2021 &copy; BBSToken is from the BBSCoin Community as part of the <a href="//www.bbscoin.click/" target="_blank">BBSCoin</a> Ecosystem. I'm in <span style="color:#F00F00">&#10084;</span> with the <a href="https://www.perl.org/" target="_new">Perl</a>
-		  </div>
-		</div>
-	  </div>
+    		  	2020 &copy; [ BBS ] Token is part of the <a href="//www.bbscoin.click/" target="_blank">BBS Coin</a> ecosystem. I'm in <span style="color:#F00F00">&#10084;</span> with the <a href="https://www.perl.org/" target="_new">Perl</a> on <a href="https://www.alojare.com/" target="_new">Alojar&eacute;</a>
+		      </div>
+		    </div>
+	    </div>
+    </footer>
 	<!-- /section -->
 
 	<!-- Scripts -->
-  <script src="/js/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script src="/js/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script -->
   <script src="/js/bootstrap.js" crossorigin="anonymous"></script>
-  </body>
-</html>
+
+    <script>
+    var mymsg, mywallet, account="";
+    var mylocal, i=0;
+    var contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
+    var tokenID = "1003413";
+    var isTRC10, isTRC20, isHolding, isExtra = "";
+    var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
+
+        function getWalletAddress() {
+            if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
+              mywallet = window.tronWeb.defaultAddress.base58;
+
+              if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
+              else {
+                document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+                $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
+                getWalletBalance(window.tronWeb.defaultAddress.base58);
+
+                document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-danger hide\">Welcome, please note that if you are not going to deposit BBSCoin(BBS), you don't need to use this tab. It is only to convert from coin to token.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin()\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
+                $("#nav-bbstoken").removeClass('d-none');
+                $("#nav-bbscoin").removeClass('d-none');
+                $("#nav-bbstoken-tab").removeClass('disabled');
+//                $("#nav-bbscoin-tab").removeClass('disabled');
+              }
+            }
+            else {
+              document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\">Login using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\">TronLink</button><div class=\"col-20 text-center\"><hr>Login using an email & password combination:</div><div class=\"row col-20 justify-content-center py-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ Register ]</b></a></div></div>";
+                $('#myLogin').modal('show');
+            }
+
+        }
+
+        function getWalletBalance(mywallet) {
+
+          isTRC10 = "";
+          isTRC20 = "";
+          bbst = 0;
+          wbbs = 0;
+//              window.setTimeout(function(){
+                 $.ajax({
+                  url: 'https://api.trongrid.io/v1/accounts/' + mywallet,
+                  dataType: 'json',
+                  cache: 'false'
+                }).done(function(result){
+                result = result.data[0];
+
+
+                if (result) {
+
+                  for (i = 0; i < result.assetV2.length; i++) {
+                    if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
+                      isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='" + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst.toLocaleString() + " <b>BBST</b></i></div>";
+                    }
+                  }
+                  if (!isTRC10) { 
+                    isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='" + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst + " <b>BBST</b></i></div>";
+                  }
+
+                  for (i = 0; i < result.trc20.length; i++) {
+                    if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
+                      isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='" + wbbs.toLocaleString() + " WBBS'>" + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                    }
+//                    else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) {
+//                      isExtra = "<div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Locality'>" + (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000) + " <b>LOCAL</b></i></div>";
+//                    }
+                    else { continue; }
+                  }
+                  if (!isTRC20) { 
+                    isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='" + wbbs.toLocaleString() + " WBBS'>" + wbbs + " <b>WBBS</b></i></div>";
+                  }
+
+                  $.ajax({
+//                  url: 'https://www.tradecrypto.click/API?v=markets&o=price&q=BBST+WBBS',
+                  url: 'https://www.tradecrypto.click/API?v=markets&o=price&q=BBST_1003413%20WBBS_TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB',
+                  dataType: 'json',
+                  cache: 'false'
+                }).done(function(price){
+                  if (price.length > 0) {
+//                    if (price[0].currency == "BBST") { trc10price = Number(price[0].price).toFixed(6); }
+//                    if (price[0].currency == "WBBS") { trc20price = Number(price[0].price).toFixed(6); }
+/*
+                    if (price[0].currency == "BBST") { trc10price = Number(price[0].ask) + Number(price[0].bid); trc10price = Number(trc10price / 2).toFixed(6); }
+                    if (price[0].currency == "WBBS") { trc20price = Number(price[0].price).toFixed(6); }
+
+                    if (price[1]) {
+                      if (price[1].currency == "BBST") { trc10price = Number(price[0].ask) + Number(price[0].bid); trc10price = Number(trc10price / 2).toFixed(6); }
+                      if (price[1].currency == "WBBS") { trc20price = Number(price[1].price).toFixed(6); }
+                    }
+*/
+                    for (var p = 0; p < price.length; p++) {
+                      if (price[p].currency == "BBST" && price[p].market == "TRX") { 
+                        //trc10price = Number(price[p].ask) + Number(price[p].bid); trc10price = Number(trc10price / 2).toFixed(8);
+                        trc10price = Number(price[p].price).toFixed(8);
+                        trc10usd = Number(price[p].usd * bbst).toFixed(6);
+                      }
+                      if (price[p].currency == "WBBS") {
+                        trc20price = Number(price[p].price).toFixed(8);
+                        trc20usd = Number(price[p].usd * wbbs).toFixed(6);
+                      }
+                    }
+
+                    if (trc10price) {trc10calc=Number(trc10price * bbst).toFixed(6);}
+                    if (trc20price) {trc20calc=Number(trc20price * wbbs).toFixed(6);}
+                  }
+                  $("#tokenBalance").empty();
+
+// &times; " + trc10price + " TRX<br> | &times; " + trc20price + " TRX<br>
+                  $("#tokenBalance").html("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC10+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'>&commat;" + trc10price + " &asymp;" + trc10calc + " <b>TRX</b> &asymp;$"+ trc10usd +"</i></div></div></div></div>");
+                  $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
+                  $("#bbstSwap").html(isTRC10);
+                  $("#wbbsSwap").html(isTRC20);
+
+              $.ajax({
+                  url: 'https://platform.bbstoken.click/API',
+                  dataType: 'json',
+                  cache: 'false',
+                  data: { airdrops: mywallet },
+                  success: function (air) {
+                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Airdrops Received'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Found <b>" + air.result.txs + "</b> Holder's Airdrop transactions, which have delivered you a total of <b>"+air.result.bbst+" BBST</b>.</i></div></div></div>");
+                  }
+                });
+
+                });
+
+
+
+//                  if (isExtra) { $("#tokenExtra").append(isExtra); }
+
+                }
+                else {
+                  $("#tokenBalance").html("<div class='card mt-3'><div class='row mt-3 mb-5'><div class='col-4 m-0 p-0'><img width='63px' src='https://coin.top/production/upload/logo/1003413.png?t=1602782798355' data-toggle='tooltip' data-placement='top' title='Wrapped BBSToken'></div><div class='col-16 text-monospace text-nowrap'><div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='0 BBST'>0 <b>BBST</b></i></div><div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='0 WBBS'>0 <b>WBBS</b></i></div></div></div></div>");
+                } // if result
+                });
+//              },100);
+
+        }
+
+
+        function BBSCoin() {
+              $.ajax({
+                  url: 'https://platform.bbstoken.click/API',
+                  dataType: 'json',
+                  cache: 'false',
+                  data: { address: mywallet },
+                  success: function (wallet) {
+
+                  if (wallet.code == 7) {
+                    $("#bbs").prepend("<p><i class='fa fa-donate'></i> Please sign/accept the [ Signature Request ] to login...</p><br>");
+                    const signedtxn = tronWeb.trx.sign(wallet.result.id + window.tronWeb.defaultAddress.hex + wallet.result.code).then(output => {
+                      $.ajax({
+                      url: 'https://platform.bbstoken.click/API',
+                      dataType: 'json',
+                      cache: 'false',
+                      data: { sign: output, id: wallet.result.id },
+                      success: function (sign) {
+                        $("#bbs").html("<i class='fa fa-donate'></i> Deposit Address<hr>" + sign.result.address).fadeIn;
+                        if (!sign.result.bbstx) { $("#bbsbalance").append("Hi! I wasn't able to find any transactions for you. If you had sent any, please wait a little longer as it has to be confirmed on the BBSCoin blockchain first for the platform to see it."); }
+                        else { $("#bbsbalance").append("You have circulated " + sign.result.tron.toLocaleString() + "  BBST, and returned " + sign.result.balance.toLocaleString() + " BBST.");  }
+                      }});
+                    });
+                  }
+              }});
+        }
+
+
+        async function TokenSwap() {
+          var token = document.getElementById("swapToken").elements.namedItem("tokenSelect").value;
+          var amount = document.getElementById("swapToken").elements.namedItem("inputTokens").value;
+
+        $("input[name='inputTokens']").attr("disabled", true);
+        $("input[name='inputTokens']").val('');
+        $('input:radio[name="tokenSelect"]').prop('checked', false);
+
+          if (!token) {alert("Please select an action")};
+          if (!amount) {alert("Please enter an amount")};
+          amount.replace(/[^0-9.]/g,'');
+
+          if (token && amount) {
+
+            try {
+
+              amount *= 1000;
+              let instance = await tronWeb.contract().at(contractID);
+              if (token == "wbbs") { let res = await instance.withdraw(amount).send(); }
+              else { let res = await instance.deposit().send({feeLimit:2000000,callValue:0,tokenValue:amount,tokenId:1003413,shouldPollResponse:true}); }
+
+            } catch (error) {
+              console.log(error);
+            }
+          }
+
+        }
+
+function showTransaction() {
+  document.getElementById("transactionAlert").innerHTML("Please wait a moment while your balance updates.");
+  document.getElementById("transactionAlert").css("display", "block");
+}
+
+function btnEnable(){
+  $("#btnSwap").attr("disabled", false);
+  $("#btnSwap").removeClass('btn-muted');
+}
+
+$( document ).ready(function() {
+      getWalletAddress();
+
+    var accountInterval = setInterval(function() {
+      if ('tronWeb' in window) {
+        if (window.tronWeb.defaultAddress.base58 !== mywallet) {
+          getWalletAddress();
+        }
+      }
+    }, 100);
+
+          var accountInterval = setInterval(function() {
+            if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
+          }, 30000);
+
+      $("#btnSwap").click(function(){
+        $("#btnSwap").attr("disabled", true);
+        $("#btnSwap").addClass('btn-muted');
+        TokenSwap();
+      return false;
+      }); 
+
+      $('input:radio[name="tokenSelect"]').change(
+        function(){
+          if (this.checked) { $("input[name='inputTokens']").attr("disabled", false); }
+      });
+
+      $("input[name='inputTokens']").keyup(function(event){
+
+            if (document.getElementById("swapToken").elements.namedItem("inputTokens").value > 0) {
+              $("#btnSwap").attr("disabled", false);
+              $("#btnSwap").removeClass('btn-muted');
+            }
+            else {
+              $("#btnSwap").attr("disabled", true);
+              $("#btnSwap").addClass('btn-muted');
+            event.preventDefault();
+            }
+ 
+      });
+      
+
+});
+
+
+    </script>
 
