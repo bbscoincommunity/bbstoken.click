@@ -55,6 +55,8 @@
       <li class="nav-item d-block d-md-none">
         <hr>
       </li>
+      <li class="nav-item d-none d-md-block border-right">
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="https://t.me/bbstoken" target="_blank"><b><i class="fab fa-telegram"></i> Telegram</b></a>
       </li>
@@ -243,7 +245,7 @@
     
     <div class="modal-content">
     <div class="modal-header">
-    <h4 class="modal-title">Platform Login:</h4>
+    <h4 class="modal-title"><i class="fas fa-sign-in-alt"></i> Platform Login:</h4>
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div id="modalpop" class="modal-body align-center bg-light">
@@ -283,7 +285,7 @@
     
     <div class="modal-content">
     <div class="modal-header">
-    <h4 class="modal-title">Platform Registration:</h4>
+    <h4 class="modal-title"><i class="fas fa-user-plus"></i> Platform Registration:</h4>
                                 <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
                                 * All forms inputs are required. Account must be activated to be able to login with emailed code.
                                 </p>
@@ -324,7 +326,7 @@
     
     <div class="modal-content">
     <div class="modal-header">
-    <h4 class="modal-title">Platform Password Reset:</h4>
+    <h4 class="modal-title"><i class="fas fa-key"></i> Platform Password Reset:</h4>
                                 <p class="card-text text-weight-bold text-danger border-bottom border-dark pb-3">
                                 * All forms inputs are required. Account must be activated to be able to login with emailed code.
                                 </p>
@@ -343,7 +345,7 @@
                                   <div class="form-group">
                                       <label for="pw" class="control-label">Password</label>
                                       <input type="password" class="form-control" id="ppw" name="pw" value="" required="" title="Please enter your password">
-                                      <span class="help-block">Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
+                                      <span class="help-block"><i class="fas fa-exclamation-triangle text-warning"></i> Please use a good password that is at least 8 characters long. You would not want someone guessing it and stealing your deposits.</span>
                                   </div>
                                   <div id="registerErrorMsg" class="alert alert-error hide"></div>
                                   <button type="submit" class="btn btn-info btn-block">Reset Password</button>
@@ -402,7 +404,7 @@
               }
             }
             else {
-              document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform.</b><hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\">TronLink</button><div class=\"col-20 text-center\"><hr>Login using an email & password combination:</div><div class=\"row col-20 justify-content-center py-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ Register ]</b></a></div></div>";
+              document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform.</b><hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>Login using an email & password combination:</div><div class=\"row col-20 justify-content-center py-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div>";
 //                $('#myLogin').modal('show');
             }
 
