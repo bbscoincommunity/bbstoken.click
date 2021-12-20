@@ -570,7 +570,7 @@
               amount *= 1000;
               let instance = await tronWeb.contract().at(contractID);
               if (token == "wbbs") { let res = await instance.withdraw(amount).send(); }
-              else { let res = await instance.deposit().send({feeLimit:2000000,callValue:0,tokenValue:amount,tokenId:1003413,shouldPollResponse:true}); }
+              else { let res = await instance.deposit().send({feeLimit:5000000,callValue:0,tokenValue:amount,tokenId:1003413,shouldPollResponse:true}); }
 
             } catch (error) {
               console.log(error);
