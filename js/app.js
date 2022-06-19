@@ -156,7 +156,7 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
                   cache: 'false',
                   data: { sign: output, id: wallet.result.id },
                   success: function (sign) {
-                    $("#bbs").html("<i class='fa fa-donate'></i> Deposit Address<hr>" + sign.result.address).fadeIn;
+                    $("#bbs").html("<i class='fa fa-donate'></i> Deposit Address<hr><span onclick=\"javascript:navigator.clipboard.writeText('" + sign.result.address + "').then(function () { alert('" + sign.result.address + " | This BBSCoin address was copied, paste it where you needed.') })\">" + sign.result.address + "</span>").fadeIn;
                     if (!sign.result.bbstx) { $("#bbsbalance").append("Hi! I wasn't able to find any transactions for you. If you had sent any, please wait a little longer as it has to be confirmed on the BBSCoin blockchain first for the platform to see it."); }
                     else { $("#bbsbalance").append("You have circulated " + sign.result.tron.toLocaleString() + "  BBST, and returned " + sign.result.balance.toLocaleString() + " BBST.");  }
                   }});
