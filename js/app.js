@@ -49,16 +49,16 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 
               for (i = 0; i < result.assetV2.length; i++) {
                 if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
-                  isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='" + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst.toLocaleString() + " <b>BBST</b></i></div>";
+                  isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
                 }
               }
               if (!isTRC10) { 
-                isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='" + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst + " <b>BBST</b></i></div>";
+                isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst + " <b>BBST</b></i></div>";
               }
 
               for (i = 0; i < result.trc20.length; i++) {
                 if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
-                  isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='" + wbbs.toLocaleString() + " WBBS'>" + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                  isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
                 }
 //                    else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) {
 //                      isExtra = "<div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Locality'>" + (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000) + " <b>LOCAL</b></i></div>";
@@ -66,7 +66,7 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
                 else { continue; }
               }
               if (!isTRC20) { 
-                isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='" + wbbs.toLocaleString() + " WBBS'>" + wbbs + " <b>WBBS</b></i></div>";
+                isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs + " <b>WBBS</b></i></div>";
               }
 
               $.ajax({
@@ -105,8 +105,8 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 //              if (!appLoaded) { $("#tokenBalance").empty(); }
 
 // &times; " + trc10price + " TRX<br> | &times; " + trc20price + " TRX<br>
-              $("#tokenBalance").html("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC10+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'>&commat;" + trc10price + " TRX &asymp;" + trc10calc + " <b>TRX</b> &asymp;$"+ trc10usd +"</i></div></div></div></div>" +
-              "<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
+              $("#tokenBalance").html("<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC10+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b><br>&asymp;$"+ trc10usd +" <b>USD</b></i></div></div></div></div>" +
+              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>");
 //              $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
               $("#bbstSwap").html(isTRC10);
               $("#wbbsSwap").html(isTRC20);
@@ -117,7 +117,7 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
                 cache: 'false',
                 data: { airdrops: mywallet },
                 success: function (air) {
-                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Airdrops Received'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Airdrops: <b>" + air.result.txs + "</b> transactions found, you had received a total of <b>"+air.result.bbst+" BBST</b>.</i></div></div></div>");
+                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Total Airdrops Received on " + air.result.txs + " transactions: " + air.result.bbst + " BBST'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Airdrops: A total of <b>"+air.result.bbst+" BBST</b> were deposited to your Tron wallet on <b>" + air.result.txs + "</b> transactions.</i></div></div></div>");
                 }
             
               });
