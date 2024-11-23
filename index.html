@@ -88,6 +88,7 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist"><!-- i class='fa fa-random'></i -->
     <a class="nav-item nav-link active py-3" id="nav-wallet-tab" data-toggle="tab" href="#nav-wallet" role="tab" aria-controls="nav-wallet" aria-selected="true"><b><i class='fa fa-wallet'></i> Wallets</b></a>
+    <a class="nav-item nav-link active py-3" id="nav-sunquail-tab" data-toggle="tab" href="#nav-sunquail" role="tab" aria-controls="nav-sunquail" aria-selected="false"><b><i class='fa fa-wallet'></i> SunQuail</b></a>
     <a class="nav-item nav-link disabled py-3" id="nav-bbstoken-tab" data-toggle="tab" href="#nav-bbstoken" role="tab" aria-controls="nav-bbstoken" aria-selected="false"><b><i class="fas fa-exchange-alt"></i> Convert</b></a>
     <a class="nav-item nav-link disabled py-3" id="nav-transactions-tab" data-toggle="tab" href="#nav-transactions" role="tab" aria-controls="nav-transactions" aria-selected="false"><b class="d-none d-md-block"><i class="fas fa-clipboard-list"></i> Transactions</b><b class="d-block d-md-none"><i class="fas fa-clipboard-list"></i> TXs</b></a>
   </div>
@@ -129,6 +130,55 @@
         </h2>
       </div>
       <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#wallets">
+        <div class="card-body">
+          <!-- h5 class="card-title text-dark"></h5 -->
+          <div class="col-20 m-0 p-0"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+            <div id="bbs" class="pb-3 pt-1 px-0 text-center" style="word-wrap: break-word;">Please login or register above.</div>
+            <div id="bbsbalance" class="pb-1 pt-3 border-top mb-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="accordion" id="sunquail">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left d-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <b><i class='fa fa-tron'></i> Tron</b>
+          </button>
+          <h5><b><i class='fa fa-tron'></i> Tron</b></h5>
+        </h2>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#sunquail">
+        <div class="card-body">
+          <!-- h5 class="card-title text-success"></h5 -->
+		<img src="/images/SunQuail.png">
+          <div class=""><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
+            <div id="tronit" class="pt-1 px-0">SunQuail: The Future is Feathered.</div>
+            <div id="tokenBalance" class="p-0">SunQuail (SUNQUAIL) Meme token</div>
+            <div id="tokenExtra" class="pb-1 px-1">
+		    SUNPump exchange link: <a href="https://sunpump.meme/token/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD">https://sunpump.meme/token/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD</a><br>
+		    BlockExplorer: <a href="https://tronscan.org/#/token20/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD">https://tronscan.org/#/token20/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD</a>
+	    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-5">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed d-none" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <b><i class='fa fa-globe'></i> BBSCoin</b>
+          </button>
+          <h5><b><i class='fa fa-globe'></i> BBSCoin</b></h5>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#sunquail">
         <div class="card-body">
           <!-- h5 class="card-title text-dark"></h5 -->
           <div class="col-20 m-0 p-0"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
