@@ -87,12 +87,13 @@
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist"><!-- i class='fa fa-random'></i -->
-    <a class="nav-item nav-link active py-3" id="nav-wallet-tab" data-toggle="tab" href="#nav-wallet" role="tab" aria-controls="nav-wallet" aria-selected="true"><b><i class='fa fa-wallet'></i> Wallets</b></a>
-    <a class="nav-item nav-link active py-3" id="nav-sunquail-tab" data-toggle="tab" href="#nav-sunquail" role="tab" aria-controls="nav-sunquail" aria-selected="false"><b><i class='fa fa-wallet'></i> SunQuail</b></a>
+    <a class="nav-item nav-link active py-3" id="nav-wallet-tab" data-toggle="tab" href="#nav-wallet" role="tab" aria-controls="nav-wallet" aria-selected="false"><b><i class='fa fa-wallet'></i> Wallets</b></a>
+    <a class="nav-item nav-link active py-3" id="nav-sunquail-tab" data-toggle="tab" href="#nav-sunquail" role="tab" aria-controls="nav-sunquail" aria-selected="true"><b><i class='fa fa-wallet'></i> SunQuail</b></a>
     <a class="nav-item nav-link disabled py-3" id="nav-bbstoken-tab" data-toggle="tab" href="#nav-bbstoken" role="tab" aria-controls="nav-bbstoken" aria-selected="false"><b><i class="fas fa-exchange-alt"></i> Convert</b></a>
     <a class="nav-item nav-link disabled py-3" id="nav-transactions-tab" data-toggle="tab" href="#nav-transactions" role="tab" aria-controls="nav-transactions" aria-selected="false"><b class="d-none d-md-block"><i class="fas fa-clipboard-list"></i> Transactions</b><b class="d-block d-md-none"><i class="fas fa-clipboard-list"></i> TXs</b></a>
   </div>
 </nav>
+
 <div class="tab-content" id="nav-tabContent">
 
 <div class="tab-pane fade show active p-0" id="nav-wallet" role="tabpanel" aria-labelledby="nav-wallet-tab">
@@ -144,6 +145,7 @@
 </div>
 
 <div class="tab-pane fade d-none" id="nav-sunquail" role="tabpanel" aria-labelledby="nav-sunquail-tab">
+
   <div class="accordion" id="sunquail">
     <div class="card">
       <div class="card-header" id="headingFour">
@@ -155,10 +157,10 @@
         </h2>
       </div>
 
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingFour" data-parent="#sunquail">
+      <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#sunquail">
         <div class="card-body">
           <!-- h5 class="card-title text-success"></h5 -->
-		<img src="/images/SunQuail.png">
+		<img style="width:500px" src="/images/SunQuail.png">
           <div class=""><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
             <div id="tronit" class="pt-1 px-0">SunQuail: The Future is Feathered.</div>
             <div id="tokenBalance" class="p-0">SunQuail (SUNQUAIL) Meme token</div>
@@ -171,15 +173,15 @@
       </div>
     </div>
     <div class="card mb-5">
-      <div class="card-header" id="headingTwo">
+      <div class="card-header" id="headingFive">
         <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left collapsed d-none" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <button class="btn btn-link btn-block text-left collapsed d-none" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
             <b><i class='fa fa-globe'></i> BBSCoin</b>
           </button>
           <h5><b><i class='fa fa-globe'></i> BBSCoin</b></h5>
         </h2>
       </div>
-      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#sunquail">
+      <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#sunquail">
         <div class="card-body">
           <!-- h5 class="card-title text-dark"></h5 -->
           <div class="col-20 m-0 p-0"><!--  border-top border-bottom border-info style="background-color:#A6CCE8" -->
