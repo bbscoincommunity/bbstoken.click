@@ -5,6 +5,7 @@ var contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
 var tokenID = "1003413";
 var isTRC10, isTRC20, isHolding, isExtra = "";
 var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
+var trc10usd, trc20usd = 0.00;
 
     function getWalletAddress() {
         if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
