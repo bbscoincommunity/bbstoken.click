@@ -3,7 +3,7 @@ var mymsg, mywallet, account="";
 var appLoaded, mylocal, i=0;
 var contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
 var tokenID = "1003413";
-var isTRC10, isTRC20, isHolding, isExtra = "";
+var isBBST, isWBBS, isHolding, isExtra = "";
 var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 var trc10usd, trc20usd = 0.00;
 
@@ -33,8 +33,8 @@ var trc10usd, trc20usd = 0.00;
 
     function getWalletBalance(mywallet) {
 
-      isTRC10 = "";
-      isTRC20 = "";
+      isBBST = "";
+      isWBBS = "";
       bbst = 0;
       wbbs = 0;
 //              window.setTimeout(function(){
@@ -50,27 +50,27 @@ var trc10usd, trc20usd = 0.00;
 
               for (i = 0; i < result.assetV2.length; i++) {
                 if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
-                  isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
+                  isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
                 }
               }
-              if (!isTRC10) { 
-                isTRC10 = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst + " <b>BBST</b></i></div>";
+              if (!isBBST) { 
+                isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst + " <b>BBST</b></i></div>";
               }
 
               for (i = 0; i < result.trc20.length; i++) {
                 if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
-                  isTRC20 += "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                  isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
                 }
-                if (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD) { sunquail = (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD / 1000000000000000000); 
-                  isTRC20 += "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
+                else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) { locality = (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000); 
+                  isLOCAL  = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + locality.toLocaleString() + " <b>LOCAL</b></i></div>";
                 }
-//                    else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) {
-//                      isExtra = "<div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Locality'>" + (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000) + " <b>LOCAL</b></i></div>";
-//                    }
+                else if (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD) { sunquail = (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD / 1000000000000000000); 
+                  isSUNQUAIL = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
+                }
                 else { continue; }
               }
-              if (!isTRC20) { 
-                isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs + " <b>WBBS</b></i></div>";
+              if (!isWBBS) { 
+                isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs + " <b>WBBS</b></i></div>";
               }
 
               $.ajax({
@@ -110,11 +110,11 @@ var trc10usd, trc20usd = 0.00;
 //              if (!appLoaded) { $("#tokenBalance").empty(); }
 
 // &times; " + trc10price + " TRX<br> | &times; " + trc20price + " TRX<br>
-              $("#tokenBalance").html("<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC10+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b><br>&asymp;$"+ trc10usd +" <b>USD</b></i></div></div></div></div>" +
-              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>");
-//              $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRC20+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
-              $("#bbstSwap").html(isTRC10);
-              $("#wbbsSwap").html(isTRC20);
+              $("#tokenBalance").html("<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isBBST+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b><br>&asymp;$"+ trc10usd +" <b>USD</b></i></div></div></div></div>" +
+              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>");
+//              $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
+              $("#bbstSwap").html(isBBST);
+              $("#wbbsSwap").html(isWBBS);
 
               $.ajax({
                   url: 'https://platform.bbstoken.click/API',
