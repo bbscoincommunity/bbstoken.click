@@ -75,7 +75,8 @@ var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
               dataType: 'json',
               cache: 'false'
             }).done(function(price){
-              if (price.length > 0) {
+                if (price && price !== "null") {
+//              if (price != "null") && (price.length > 0) {
 //                    if (price[0].currency == "BBST") { trc10price = Number(price[0].price).toFixed(6); }
 //                    if (price[0].currency == "WBBS") { trc20price = Number(price[0].price).toFixed(6); }
 /*
