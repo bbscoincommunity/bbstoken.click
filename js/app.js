@@ -59,7 +59,10 @@ var trc10usd, trc20usd = 0.00;
 
               for (i = 0; i < result.trc20.length; i++) {
                 if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
-                  isTRC20 = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                  isTRC20 += "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                }
+                if (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD) { sunquail = (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD / 1000000000000000000); 
+                  isTRC20 += "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
                 }
 //                    else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) {
 //                      isExtra = "<div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Locality'>" + (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000) + " <b>LOCAL</b></i></div>";
