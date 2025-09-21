@@ -124,7 +124,7 @@ var trc10usd, trc20usd = 0.00;
                 cache: 'false',
                 data: { airdrops: mywallet },
                 success: function (air) {
-                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Total Airdrops Received on " + air.result.txs + " transactions: " + air.result.bbst + " BBST'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Airdrops: A total of <b>"+air.result.bbst+" BBST</b> were deposited to your Tron wallet on <b>" + air.result.txs + "</b> transactions.</i></div></div></div>");
+                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Total Airdrops Received on " + air.result.txs + " transactions: " + air.result.bbst + " BBST'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Airdrops: A total of <b>"+air.result.bbst+" BBST</b> were air dropped to your Tron wallet on <b>" + air.result.txs + "</b> transactions.</i></div></div></div>");
                 }
             
               });
