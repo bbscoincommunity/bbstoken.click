@@ -271,16 +271,16 @@ $( document ).ready(function() {
 //  getWalletAddress();
   $("#connectButton").on('click', connectWallet);
     
-var accountInterval = setInterval(function() {
-  if ('tronWeb' in window) {
-    if (window.tronLink && mywallet !== null) {
-      connectWallet();
-    }
-  }
-}, 100);
+//var accountInterval = setInterval(function() {
+//  if ('tronWeb' in window) {
+//    if (window.tronLink && mywallet !== null) {
+//      connectWallet();
+//    }
+//  }
+//}, 100);
 
       var accountInterval = setInterval(function() {
-        if (window.tronLink && mywallet) { getWalletBalance(mywallet); }
+        if (window.tronLink && mywallet !== null) { getWalletBalance(mywallet); }
       }, 30000);
 
   $("#btnSwap").click(function(){
