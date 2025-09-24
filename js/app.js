@@ -146,7 +146,8 @@ var trc10usd, trc20usd = 0.00;
     }
 
 
-    function BBSCoin() {
+
+  function BBSCoin() {
           $.ajax({
               url: 'https://platform.bbstoken.click/API',
               dataType: 'json',
@@ -169,7 +170,14 @@ var trc10usd, trc20usd = 0.00;
                   }});
                 });
               }
-          }});
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Request failed!");
+                console.log("Status: " + textStatus);
+                console.log("Error: " + errorThrown);
+                console.log("Response Text: " + jqXHR.responseText);
+              }
+          });
     }
 
 
