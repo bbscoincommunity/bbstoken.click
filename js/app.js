@@ -10,8 +10,8 @@ const connectButton = document.getElementById('connectButton');
 
 //    function getWalletAddress() {
       const getWalletAddress = async () => {
-        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
-              try {
+        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) {
+           try {
         // Make the request to connect to the user's wallet
         const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
 
@@ -43,10 +43,10 @@ const connectButton = document.getElementById('connectButton');
     } else {
       // If tronLink is not found, the user doesn't have the extension.
       console.log("TronLink extension not found!");
-      alert("Please install the TronLink wallet extension to connect.");
+//      alert("Please install the TronLink wallet extension to connect.");
       // Optionally, provide a link to the TronLink website
       // window.location.href = 'https://www.tronlink.org/';
-    }
+//    }
 //          mywallet = window.tronWeb.defaultAddress.base58;
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
@@ -62,10 +62,10 @@ const connectButton = document.getElementById('connectButton');
 //                $("#nav-bbscoin-tab").removeClass('disabled');
           }
         }
-        else {
-          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
+//        else {
+          //document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
 //                $('#myLogin').modal('show');
-        }
+//        }
 
     };
 
