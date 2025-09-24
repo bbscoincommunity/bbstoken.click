@@ -7,6 +7,48 @@ var isBBST, isWBBS, isHolding, isExtra = "";
 var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 var trc10usd, trc20usd = 0.00;
 
+const connectWallet = async () => {
+    // First, check if the tronLink object exists on the window
+    if (window.tronLink) {
+      try {
+        // Make the request to connect to the user's wallet
+        const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+
+        // Check if the connection was successful (code 200)
+        if (res.code === 200) {
+          console.log("Successfully connected to TronLink!");
+          
+          // tronLink.tronWeb is now available and contains user info
+          const userAddress = window.tronLink.tronWeb.defaultAddress.base58;
+          
+          console.log("User's wallet address:", userAddress);
+          walletAddressP.innerText = `Connected: ${userAddress}`;
+          connectButton.innerText = 'Connected';
+          connectButton.disabled = true;
+
+        } else {
+          // Handle cases where connection was not fully successful
+          console.error("Connection request returned an error:", res);
+          alert(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
+        }
+      } catch (error) {
+        // This block catches errors, including when the user rejects the request.
+        console.error("An error occurred while connecting:", error);
+        if (error.code === 4001) {
+            alert("Connection request was rejected by the user.");
+        } else {
+            alert(`An error occurred: ${error.message}`);
+        }
+      }
+    } else {
+      // If tronLink is not found, the user doesn't have the extension.
+      console.log("TronLink extension not found!");
+      alert("Please install the TronLink wallet extension to connect.");
+      // Optionally, provide a link to the TronLink website
+      // window.location.href = 'https://www.tronlink.org/';
+    }
+  };
+
     function getWalletAddress() {
         if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
           mywallet = window.tronWeb.defaultAddress.base58;
@@ -25,7 +67,8 @@ var trc10usd, trc20usd = 0.00;
           }
         }
         else {
-          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
+          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button id=\"connectButton\" type=\"button\" class=\"btn btn-primary p-3\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
+//        document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button id=\"connectButton\" type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
 //                $('#myLogin').modal('show');
         }
 
@@ -224,17 +267,18 @@ $("#btnSwap").removeClass('btn-muted');
 
 $( document ).ready(function() {
   getWalletAddress();
-
+  connectButton.addEventListener('click', connectWallet);
+    
 var accountInterval = setInterval(function() {
   if ('tronWeb' in window) {
-    if (window.tronWeb.defaultAddress.base58 !== mywallet) {
+    if (window.tronLink && window.tronWeb.defaultAddress.base58 !== mywallet) {
       getWalletAddress();
     }
   }
 }, 100);
 
       var accountInterval = setInterval(function() {
-        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
+        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
       }, 30000);
 
   $("#btnSwap").click(function(){
