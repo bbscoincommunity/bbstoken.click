@@ -202,7 +202,7 @@ const connectWallet = async () => {
               if (wallet.code == 7) {
                 $("#bbs").prepend("<p><i class='fa fa-donate'></i> Please sign/accept the [ Signature Request ] to login...</p><br>");
                     // wallet.result.id + window.tronWeb.defaultAddress.hex
-                  const signedtxn = tronWeb.trx.signMessageV2("BBSToken DApp login, sign the code: " + wallet.result.code).then(output => {
+                  const signedtxn = tronWeb.trx.signMessageV2("BBSToken DApp login, sign the verification code: " + wallet.result.code).then(output => {
                   $.ajax({
                   url: 'https://platform.bbstoken.click/API',
                   dataType: 'json',
