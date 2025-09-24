@@ -60,7 +60,7 @@ const connectWallet = async () => {
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
             getWalletBalance(mywallet);
 
-            document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin()\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
+            document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin("+mywallet+")\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
             $("#nav-bbstoken").removeClass('d-none');
             $("#nav-bbscoin").removeClass('d-none');
             $("#nav-bbstoken-tab").removeClass('disabled');
@@ -191,7 +191,7 @@ const connectWallet = async () => {
 
 
 
-  function BBSCoin() {
+  function BBSCoin(mywallet) {
           $.ajax({
               url: 'https://platform.bbstoken.click/API',
               dataType: 'json',
