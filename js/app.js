@@ -6,69 +6,30 @@ var tokenID = "1003413";
 var isBBST, isWBBS, isHolding, isExtra = "";
 var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 var trc10usd, trc20usd = 0.00;
-const connectButton = document.getElementById('connectButton');
 
-//    function getWalletAddress() {
-      const getWalletAddress = async () => {
-        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) {
-          try {
-        // Make the request to connect to the user's wallet
-            const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+    function getWalletAddress() {
+        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
+          mywallet = window.tronWeb.defaultAddress.base58;
 
-        // Check if the connection was successful (code 200)
-            if (res.code === 200) {
-              console.log("Successfully connected to TronLink!");
-          
-          // tronLink.tronWeb is now available and contains user info
-              const mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          
-              console.log("User's wallet address:", mywallet);
-              connectButton.innerText = 'Connected';
-              connectButton.disabled = true;
+          if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
+          else {
+            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
+            getWalletBalance(window.tronWeb.defaultAddress.base58);
 
-              if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
-              else {
-                document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
-//                $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
-                getWalletBalance(window.tronLink.tronWeb.defaultAddress.base58);
-                    
-                document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin()\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
-                $("#nav-bbstoken").removeClass('d-none');
-                $("#nav-bbscoin").removeClass('d-none');
-                $("#nav-bbstoken-tab").removeClass('disabled');
+            document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin()\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
+            $("#nav-bbstoken").removeClass('d-none');
+            $("#nav-bbscoin").removeClass('d-none');
+            $("#nav-bbstoken-tab").removeClass('disabled');
 //                $("#nav-bbscoin-tab").removeClass('disabled');
-              }
-
-            } else {
-          // Handle cases where connection was not fully successful
-              console.error("Connection request returned an error:", res);
-              alert(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
-            }
-          } catch (error) {
-        // This block catches errors, including when the user rejects the request.
-            console.error("An error occurred while connecting:", error);
-            if (error.code === 4001) {
-              alert("Connection request was rejected by the user.");
-            } else {
-              alert(`An error occurred: ${error.message}`);
-            }
           }
-      } else {
-      // If tronLink is not found, the user doesn't have the extension.
-      console.log("TronLink extension not found!");
-//      alert("Please install the TronLink wallet extension to connect.");
-      // Optionally, provide a link to the TronLink website
-      // window.location.href = 'https://www.tronlink.org/';
-//    }
-//          mywallet = window.tronWeb.defaultAddress.base58;
-
-//        }
-//        else {
-          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
+        }
+        else {
+          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>Login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
 //                $('#myLogin').modal('show');
         }
 
-    };
+    }
 
     function getWalletBalance(mywallet) {
 
@@ -77,12 +38,11 @@ const connectButton = document.getElementById('connectButton');
       bbst = 0;
       wbbs = 0;
 //              window.setTimeout(function(){
-//             $.ajax({
-//              url: 'https://api.trongrid.io/v1/accounts/' + mywallet,
-//              dataType: 'json',
-//              cache: 'false'
-//            })
-            getWalletBalance(mywallet).done(function(result){
+             $.ajax({
+              url: 'https://api.trongrid.io/v1/accounts/' + mywallet,
+              dataType: 'json',
+              cache: 'false'
+            }).done(function(result){
             result = result.data[0];
 
 
