@@ -1,0 +1,20 @@
+{
+  "short_name": "BBSToken",
+  "name": "BBSToken Platform",
+  "icons": [
+    {
+      "src": "/images/1003413.png.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    },
+    {
+      "src": "/bbscoin.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "white"
+}
