@@ -118,7 +118,60 @@
 
           <div class="tab-pane show active" id="nav-wallet" role="tabpanel" aria-labelledby="nav-wallet-tab">
 
+<button id="connectButton">Connect TronLink Wallet</button>
+<p id="walletAddress"></p>
 
+<script>
+  // Find the button and paragraph elements
+  const connectButton = document.getElementById('connectButton');
+  const walletAddressP = document.getElementById('walletAddress');
+
+  // Create an asynchronous function to handle the connection
+  const connectWallet = async () => {
+    // First, check if the tronLink object exists on the window
+    if (window.tronLink) {
+      try {
+        // Make the request to connect to the user's wallet
+        const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+
+        // Check if the connection was successful (code 200)
+        if (res.code === 200) {
+          console.log("Successfully connected to TronLink!");
+          
+          // tronLink.tronWeb is now available and contains user info
+          const userAddress = window.tronLink.tronWeb.defaultAddress.base58;
+          
+          console.log("User's wallet address:", userAddress);
+          walletAddressP.innerText = `Connected: ${userAddress}`;
+          connectButton.innerText = 'Connected';
+          connectButton.disabled = true;
+
+        } else {
+          // Handle cases where connection was not fully successful
+          console.error("Connection request returned an error:", res);
+          alert(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
+        }
+      } catch (error) {
+        // This block catches errors, including when the user rejects the request.
+        console.error("An error occurred while connecting:", error);
+        if (error.code === 4001) {
+            alert("Connection request was rejected by the user.");
+        } else {
+            alert(`An error occurred: ${error.message}`);
+        }
+      }
+    } else {
+      // If tronLink is not found, the user doesn't have the extension.
+      console.log("TronLink extension not found!");
+      alert("Please install the TronLink wallet extension to connect.");
+      // Optionally, provide a link to the TronLink website
+      // window.location.href = 'https://www.tronlink.org/';
+    }
+  };
+
+  // Add a click event listener to the button
+  connectButton.addEventListener('click', connectWallet);
+</script>
             <div class="accordion" id="wallets">
               <div class="card">
                 <div class="card-header" id="headingOne">
@@ -495,5 +548,6 @@
 </body>
 
 </html>
+
 
 
