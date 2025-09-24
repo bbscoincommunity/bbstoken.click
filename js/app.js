@@ -268,7 +268,7 @@ $("#btnSwap").removeClass('btn-muted');
 }
 
 $( document ).ready(function() {
-//  getWalletAddress();
+  getWalletAddress();
   $("#connectButton").on('click', connectWallet);
     
 //var accountInterval = setInterval(function() {
