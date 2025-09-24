@@ -265,7 +265,8 @@ $( document ).ready(function() {
   getWalletAddress();
 
 var accountInterval = setInterval(function() {
-  if ('tronWeb' in window) {
+//  if ('tronWeb' in window) {
+  if (window.tronLink) {
     if (window.tronWeb.defaultAddress.base58 !== mywallet) {
       getWalletAddress();
     }
@@ -273,7 +274,7 @@ var accountInterval = setInterval(function() {
 }, 100);
 
       var accountInterval = setInterval(function() {
-        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
+        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
       }, 30000);
 
   $("#btnSwap").click(function(){
