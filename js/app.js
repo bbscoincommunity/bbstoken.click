@@ -50,14 +50,15 @@ const connectWallet = async () => {
   };
 
     function getWalletAddress(mywallet) {
-        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
+//        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
+        if (window.tronLink && mywallet) {
 //          mywallet = window.tronWeb.defaultAddress.base58;
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
             document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
             $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
-            getWalletBalance(window.tronWeb.defaultAddress.base58);
+            getWalletBalance(mywallet);
 
             document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin()\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
             $("#nav-bbstoken").removeClass('d-none');
@@ -267,19 +268,19 @@ $("#btnSwap").removeClass('btn-muted');
 }
 
 $( document ).ready(function() {
-  getWalletAddress();
+//  getWalletAddress();
   $("#connectButton").on('click', connectWallet);
     
 var accountInterval = setInterval(function() {
   if ('tronWeb' in window) {
-    if (window.tronLink && window.tronWeb.defaultAddress.base58 !== mywallet) {
-      getWalletAddress();
+    if (window.tronLink && !mywallet) {
+      connectWallet();
     }
   }
 }, 100);
 
       var accountInterval = setInterval(function() {
-        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
+        if (window.tronLink && mywallet) { getWalletBalance(mywallet); }
       }, 30000);
 
   $("#btnSwap").click(function(){
