@@ -268,7 +268,7 @@ $("#btnSwap").removeClass('btn-muted');
 
 $( document ).ready(function() {
   getWalletAddress();
-  $("#connectButton").addEventListener('click', connectWallet);
+  $("#connectButton").on('click', connectWallet);
     
 var accountInterval = setInterval(function() {
   if ('tronWeb' in window) {
