@@ -82,7 +82,7 @@ const connectButton = document.getElementById('connectButton');
 //              dataType: 'json',
 //              cache: 'false'
 //            })
-            getWalletBalance(mywallet);.done(function(result){
+            getWalletBalance(mywallet).done(function(result){
             result = result.data[0];
 
 
