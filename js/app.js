@@ -25,7 +25,7 @@ var trc10usd, trc20usd = 0.00;
           }
         }
         else {
-          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>Login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
+          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
 //                $('#myLogin').modal('show');
         }
 
@@ -157,8 +157,7 @@ var trc10usd, trc20usd = 0.00;
               console.log(wallet);
               if (wallet.code == 7) {
                 $("#bbs").prepend("<p><i class='fa fa-donate'></i> Please sign/accept the [ Signature Request ] to login...</p><br>");
-                  // wallet.result.id + window.tronWeb.defaultAddress.hex + 
-                const signedtxn = tronWeb.trx.signMessageV2("BBSToken DApp sign to login to your session #" + wallet.result.code).then(output => {
+                const signedtxn = tronWeb.trx.signMessageV2(wallet.result.id + window.tronWeb.defaultAddress.hex + wallet.result.code).then(output => {
                   $.ajax({
                   url: 'https://platform.bbstoken.click/API',
                   dataType: 'json',
@@ -227,8 +226,7 @@ $( document ).ready(function() {
   getWalletAddress();
 
 var accountInterval = setInterval(function() {
-//  if ('tronWeb' in window) {
-  if (window.tronLink) {
+  if ('tronWeb' in window) {
     if (window.tronWeb.defaultAddress.base58 !== mywallet) {
       getWalletAddress();
     }
@@ -236,7 +234,7 @@ var accountInterval = setInterval(function() {
 }, 100);
 
       var accountInterval = setInterval(function() {
-        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
+        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress) { getWalletBalance(window.tronWeb.defaultAddress.base58); }
       }, 30000);
 
   $("#btnSwap").click(function(){
