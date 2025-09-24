@@ -19,10 +19,10 @@ const connectWallet = async () => {
           console.log("Successfully connected to TronLink!");
           
           // tronLink.tronWeb is now available and contains user info
-          const userAddress = window.tronLink.tronWeb.defaultAddress.base58;
+          const mywallet = window.tronLink.tronWeb.defaultAddress.base58;
           
-          console.log("User's wallet address:", userAddress);
-          walletAddressP.innerText = `Connected: ${userAddress}`;
+          console.log("User's wallet address:", mywallet);
+//          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
 
@@ -49,9 +49,9 @@ const connectWallet = async () => {
     }
   };
 
-    function getWalletAddress() {
-        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
-          mywallet = window.tronWeb.defaultAddress.base58;
+    function getWalletAddress(mywallet) {
+        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
+//          mywallet = window.tronWeb.defaultAddress.base58;
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
