@@ -153,7 +153,7 @@ var trc10usd, trc20usd = 0.00;
               cache: 'false',
               data: { address: mywallet },
               success: function (wallet) {
-
+                  alert(wallet);
               if (wallet.code == 7) {
                 $("#bbs").prepend("<p><i class='fa fa-donate'></i> Please sign/accept the [ Signature Request ] to login...</p><br>");
                 const signedtxn = tronWeb.trx.sign(wallet.result.id + window.tronWeb.defaultAddress.hex + wallet.result.code).then(output => {
