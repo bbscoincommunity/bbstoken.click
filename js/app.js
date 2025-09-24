@@ -1,11 +1,11 @@
 console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.click.\n\nComing Soon! Our own micro CEX.\n');
-var mymsg=null, mywallet=null, account=null;
-var appLoaded=0, mylocal=0, i=0;
-var contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
-var tokenID = "1003413";
-var isBBST=null, isWBBS=null, isHolding=null, isExtra=null;
-var trc10price=0, trc20price=0, trc10calc=0, trc20calc=0, bbst=0, wbbs=0;
-var trc10usd=0.00, trc20usd=0.00;
+let mymsg=null, mywallet=null, account=null;
+let appLoaded=0, mylocal=0, i=0;
+const contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
+const tokenID = "1003413";
+let isBBST=null, isWBBS=null, isHolding=null, isExtra=null;
+let trc10price=0, trc20price=0, trc10calc=0, trc20calc=0, bbst=0, wbbs=0;
+let trc10usd=0.00, trc20usd=0.00;
 
 const connectWallet = async () => {
     // First, check if the tronLink object exists on the window
