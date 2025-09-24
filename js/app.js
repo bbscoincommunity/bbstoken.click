@@ -25,7 +25,7 @@ const connectWallet = async () => {
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
-
+            getWalletAddress(mywallet);
         } else {
           // Handle cases where connection was not fully successful
           console.error("Connection request returned an error:", res);
