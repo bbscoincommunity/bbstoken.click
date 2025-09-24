@@ -6,10 +6,48 @@ var tokenID = "1003413";
 var isBBST, isWBBS, isHolding, isExtra = "";
 var trc10price, trc20price, trc10calc, trc20calc, bbst, wbbs = 0;
 var trc10usd, trc20usd = 0.00;
+const connectButton = document.getElementById('connectButton');
 
-    function getWalletAddress() {
-        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
-          mywallet = window.tronWeb.defaultAddress.base58;
+//    function getWalletAddress() {
+      const getWalletAddress = async () => {
+        if (window.tronLink && 'tronWeb' in window && 'base58' in window.tronWeb.defaultAddress){
+              try {
+        // Make the request to connect to the user's wallet
+        const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+
+        // Check if the connection was successful (code 200)
+        if (res.code === 200) {
+          console.log("Successfully connected to TronLink!");
+          
+          // tronLink.tronWeb is now available and contains user info
+          const mywallet = window.tronLink.tronWeb.defaultAddress.base58;
+          
+          console.log("User's wallet address:", mywallet);
+          connectButton.innerText = 'Connected';
+          connectButton.disabled = true;
+
+        } else {
+          // Handle cases where connection was not fully successful
+          console.error("Connection request returned an error:", res);
+          alert(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
+        }
+      } catch (error) {
+        // This block catches errors, including when the user rejects the request.
+        console.error("An error occurred while connecting:", error);
+        if (error.code === 4001) {
+            alert("Connection request was rejected by the user.");
+        } else {
+            alert(`An error occurred: ${error.message}`);
+        }
+      }
+    } else {
+      // If tronLink is not found, the user doesn't have the extension.
+      console.log("TronLink extension not found!");
+      alert("Please install the TronLink wallet extension to connect.");
+      // Optionally, provide a link to the TronLink website
+      // window.location.href = 'https://www.tronlink.org/';
+    }
+//          mywallet = window.tronWeb.defaultAddress.base58;
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
@@ -29,7 +67,7 @@ var trc10usd, trc20usd = 0.00;
 //                $('#myLogin').modal('show');
         }
 
-    }
+    };
 
     function getWalletBalance(mywallet) {
 
