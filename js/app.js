@@ -273,7 +273,7 @@ $( document ).ready(function() {
     
 var accountInterval = setInterval(function() {
   if ('tronWeb' in window) {
-    if (window.tronLink && !mywallet) {
+    if (window.tronLink && mywallet !== null) {
       connectWallet();
     }
   }
