@@ -91,10 +91,10 @@ const connectWallet = async () => {
 
 
             if (result) {
-
+              isTRX = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + window.tronWeb.fromSun(result.balance) + " TRX'><i class='text-dark'><b>Balance:</b> " + window.tronWeb.fromSun(result.balance) + " <b>TRX</b></i></div>";
               for (i = 0; i < result.assetV2.length; i++) {
                 if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
-                  isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
+                  isBBST += "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
                 }
               }
               if (!isBBST) { 
