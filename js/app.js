@@ -59,7 +59,7 @@ const connectWallet = async () => {
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
-            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + DAppWallet + "'><!-- text-nowrap --><b><i class='fas fa-arrow-right-from-bracket'></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + DAppWallet + "'><!-- text-nowrap --><b><i class="fas fa-wallet"></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
             getWalletBalance(mywallet);
 
