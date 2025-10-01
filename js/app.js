@@ -52,7 +52,7 @@ const connectWallet = async () => {
     }
   };
 
-    function getWalletAddress(mywallet, myHEXwallet) {
+    function getWalletAddress(mywallet, DAppWallet) {
 //        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
         if (window.tronLink && mywallet) {
 //          mywallet = window.tronWeb.defaultAddress.base58;
