@@ -20,7 +20,7 @@ const connectWallet = async () => {
           
           // tronLink.tronWeb is now available and contains user info
           const mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          const walletHEX = window.tronLink.tronWeb.defaultAddress.hex.slice(2);
+          const walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
           const myHEXwallet = walletHEX.slice(2);
 
           console.log("User's wallet address:", mywallet);
