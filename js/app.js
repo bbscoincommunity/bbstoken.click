@@ -28,7 +28,7 @@ const connectWallet = async () => {
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
-            getWalletAddress(mywallet);
+            getWalletAddress(mywallet, myHEXwallet);
         } else {
           // Handle cases where connection was not fully successful
           console.error("Connection request returned an error:", res);
@@ -52,7 +52,7 @@ const connectWallet = async () => {
     }
   };
 
-    function getWalletAddress(mywallet) {
+    function getWalletAddress(mywallet, myHEXwallet) {
 //        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
         if (window.tronLink && mywallet) {
 //          mywallet = window.tronWeb.defaultAddress.base58;
