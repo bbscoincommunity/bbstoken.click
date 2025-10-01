@@ -1,9 +1,9 @@
-console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.click.\n\nComing Soon! Our own micro CEX.\n');
-let mymsg=null, mywallet=null, account=null;
+console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.org.\n\nComing Soon! Our own micro DEX.\n');
+let mymsg=null, mywallet=null, myHEXwallet=null, account=null;
 let appLoaded=0, mylocal=0, i=0;
 const contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
 const tokenID = "1003413";
-let isBBST=null, isWBBS=null, isHolding=null, isExtra=null;
+let isBBST=null, isWBBS=null, isHolding=null, isExtra=null, isTRX=null, isWTRX=null;
 let trc10price=0, trc20price=0, trc10calc=0, trc20calc=0, bbst=0, wbbs=0;
 let trc10usd=0.00, trc20usd=0.00;
 
@@ -20,8 +20,10 @@ const connectWallet = async () => {
           
           // tronLink.tronWeb is now available and contains user info
           const mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          
+          const myHEXwallet = window.tronLink.tronWeb.defaultAddress.hex.slice(2);
+
           console.log("User's wallet address:", mywallet);
+          console.log("User's wallet hex address:", myHEXwallet);
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
@@ -56,7 +58,7 @@ const connectWallet = async () => {
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
-            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>" + myHEXwallet + "&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
             getWalletBalance(mywallet);
 
@@ -91,30 +93,33 @@ const connectWallet = async () => {
 
 
             if (result) {
-              isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + window.tronWeb.fromSun(result.balance) + " TRX'><i class='text-dark'><b>Balance:</b> " + window.tronWeb.fromSun(result.balance) + " <b>TRX</b></i></div>";
+              isTRX = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + window.tronWeb.fromSun(result.balance) + " TRX'><i class='text-dark'>" + window.tronWeb.fromSun(result.balance) + " <b>TRX</b></i></div>";
               for (i = 0; i < result.assetV2.length; i++) {
                 if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
-                  isBBST += "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst.toLocaleString() + " <b>BBST</b></i></div>";
+                  isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst.toLocaleString() + " <b>BBST</b></i></div>";
                 }
               }
               if (!isBBST) { 
-                isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'><b>Balance:</b> " + bbst + " <b>BBST</b></i></div>";
+                isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst + " <b>BBST</b></i></div>";
               }
 
               for (i = 0; i < result.trc20.length; i++) {
                 if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
-                  isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
+                  isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'>" + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
                 }
                 else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) { locality = (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000); 
-                  isLOCAL  = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + locality.toLocaleString() + " <b>LOCAL</b></i></div>";
+                  isLOCAL  = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'>" + locality.toLocaleString() + " <b>LOCAL</b></i></div>";
                 }
                 else if (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD) { sunquail = (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD / 1000000000000000000); 
-                  isSUNQUAIL = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'><b>Balance:</b> " + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
+                  isSUNQUAIL = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'>" + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
+                }
+                else if (result.trc20[i].TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR) { wtrx = (result.trc20[i].TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR / 1000000); 
+                  isWTRX = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wtrx.toLocaleString() + " WTRX'>" + wtrx.toLocaleString() + " <b>WTRX</b></i></div>";
                 }
                 else { continue; }
               }
               if (!isWBBS) { 
-                isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'><b>Balance:</b> " + wbbs + " <b>WBBS</b></i></div>";
+                isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'>" + wbbs + " <b>WBBS</b></i></div>";
               }
 
               $.ajax({
@@ -154,10 +159,14 @@ const connectWallet = async () => {
 //              if (!appLoaded) { $("#tokenBalance").empty(); }
 
 // &times; " + trc10price + " TRX<br> | &times; " + trc20price + " TRX<br>
-              $("#tokenBalance").html("<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isBBST+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b><br>&asymp;$"+ trc10usd +" <b>USD</b></i></div></div></div></div>" +
-              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>" +
-              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD.png' data-toggle='tooltip' data-placement='top' title='SunQuail'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isSUNQUAIL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>" +
-              "<div class='card mt-3 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='50px' src='/images/TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th.png' data-toggle='tooltip' data-placement='top' title='Locality'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isLOCAL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b><br>&asymp;$"+ trc20usd +" <b>USD</b></i></div></div></div></div>");
+              $("#tokenBalance").html(
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='https://static.tronscan.org/production/logo/trx.png' data-toggle='tooltip' data-placement='top' title='Tron'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRX+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b>&asymp;$"+ trc10usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='https://static.tronscan.org/production/upload/logo/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR.png' data-toggle='tooltip' data-placement='top' title='Wrapped TRX'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWTRX+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>WTRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isBBST+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b>&asymp;$"+ trc10usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD.png' data-toggle='tooltip' data-placement='top' title='SunQuail'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isSUNQUAIL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
+              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th.png' data-toggle='tooltip' data-placement='top' title='Locality'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isLOCAL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>"
+            );
 //              $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
               $("#bbstSwap").html(isBBST);
               $("#wbbsSwap").html(isWBBS);
