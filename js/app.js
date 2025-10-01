@@ -1,5 +1,5 @@
 console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.org.\n\nComing Soon! Our own micro DEX.\n');
-let mymsg=null, mywallet=null, myHEXwallet=null, account=null;
+let mymsg=null, mywallet=null, DAppWallet=null, account=null;
 let appLoaded=0, mylocal=0, i=0;
 const contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
 const tokenID = "1003413";
@@ -21,14 +21,14 @@ const connectWallet = async () => {
           // tronLink.tronWeb is now available and contains user info
           let mywallet = window.tronLink.tronWeb.defaultAddress.base58;
           let walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
-          let myHEXwallet = walletHEX.slice(2);
+          let DAppWallet = window.tronWeb.address.fromHex('19'+walletHEX.slice(2));
 
           console.log("User's wallet address:", mywallet);
-          console.log("User's wallet hex address:", myHEXwallet);
+          console.log("User's DApp wallet address:", DAppWallet);
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
-            getWalletAddress(mywallet, myHEXwallet);
+            getWalletAddress(mywallet, DAppWallet);
         } else {
           // Handle cases where connection was not fully successful
           console.error("Connection request returned an error:", res);
@@ -59,7 +59,7 @@ const connectWallet = async () => {
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
-            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>" + myHEXwallet + "&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br>" + DAppWallet + "&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
             getWalletBalance(mywallet);
 
