@@ -30,7 +30,7 @@ const connectWallet = async () => {
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
-            getWalletAddress(mywallet, DAppWallet);
+            getWalletAddress(mywallet, DAppWallet, walletHEX);
         } else {
           // Handle cases where connection was not fully successful
           console.error("Connection request returned an error:", res);
@@ -54,7 +54,7 @@ const connectWallet = async () => {
     }
   };
 
-    function getWalletAddress(mywallet, DAppWallet) {
+    function getWalletAddress(mywallet, DAppWallet, walletHEX) {
 //        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
         if (window.tronLink && mywallet) {
 //          mywallet = window.tronWeb.defaultAddress.base58;
@@ -63,7 +63,7 @@ const connectWallet = async () => {
           else {
             document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='Recorded as: " + DAppWallet + "'><!-- text-nowrap --><b><i class='fas fa-file-medical-alt'></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
-            getWalletBalance(mywallet);
+            getWalletBalance(walletHEX);
 
             document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin('"+mywallet+"')\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
             $("#nav-bbstoken").removeClass('d-none');
@@ -80,7 +80,7 @@ const connectWallet = async () => {
 
     }
 
-    function getWalletBalance(mywallet) {
+    function getWalletBalance(walletHEX) {
 
       isBBST = "";
       isWBBS = "";
@@ -88,7 +88,7 @@ const connectWallet = async () => {
       wbbs = 0;
 //              window.setTimeout(function(){
              $.ajax({
-              url: 'https://api.trongrid.io/v1/accounts/' + mywallet,
+              url: 'https://api.trongrid.io/v1/accounts/41' + walletHEX,
               dataType: 'json',
               cache: 'false'
             }).done(function(result){
@@ -292,7 +292,7 @@ $( document ).ready(function() {
 //}, 100);
 
       var accountInterval = setInterval(function() {
-        if (window.tronLink && mywallet !== null) { getWalletBalance(mywallet); }
+        if (window.tronLink && walletHEX !== null) { getWalletBalance(walletHEX); }
       }, 30000);
 
   $("#btnSwap").click(function(){
