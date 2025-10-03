@@ -1,5 +1,5 @@
 console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.org.\n\nComing Soon! Our own micro DEX.\n');
-let mymsg=null, mywallet=null, DAppWallet=null, account=null;
+let mymsg=null, mywallet=null, DAppWallet=null, walletHEX=null, account=null;
 let appLoaded=0, mylocal=0, i=0;
 const contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
 const tokenID = "1003413";
@@ -19,10 +19,10 @@ const connectWallet = async () => {
           console.log("Successfully connected to TronLink!");
           
           // tronLink.tronWeb is now available and contains user info
-          let mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          let walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
+          mywallet = window.tronLink.tronWeb.defaultAddress.base58;
+          walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
           walletHEX = walletHEX.slice(2);
-          let DAppWallet = window.tronWeb.address.fromHex('19'+walletHEX);
+          DAppWallet = window.tronWeb.address.fromHex('19'+walletHEX);
 
           console.log("User's Tron wallet address:", mywallet);
           console.log("User's DApp wallet address:", DAppWallet);
