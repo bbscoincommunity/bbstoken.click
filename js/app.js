@@ -20,11 +20,12 @@ const connectWallet = async () => {
           
           // tronLink.tronWeb is now available and contains user info
           let mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          let walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
+          let walletHEX = $(window.tronLink.tronWeb.defaultAddress.hex).slice(2);
           let DAppWallet = window.tronWeb.address.fromHex('19'+walletHEX.slice(2));
 
-          console.log("User's wallet address:", mywallet);
+          console.log("User's Tron wallet address:", mywallet);
           console.log("User's DApp wallet address:", DAppWallet);
+          console.log("User's wallet Hex address:", walletHEX);
 //          walletAddressP.innerText = `Connected: ${mywallet}`;
           connectButton.innerText = 'Connected';
           connectButton.disabled = true;
@@ -59,7 +60,7 @@ const connectWallet = async () => {
 
           if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
           else {
-            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + DAppWallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
+            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='Recorded as: " + DAppWallet + "'><!-- text-nowrap --><b><i class='fas fa-file-medical-alt'></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
 //            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
             getWalletBalance(mywallet);
 
