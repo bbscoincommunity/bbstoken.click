@@ -216,11 +216,12 @@ const getWalletBalance = async (hexAddress) => {
         imageUrl: 'https://bbstoken.click/images/wrappedbbstokenSQwhite.png' // Add your image path
     }
     };
-    $("#tokenBalance").html(
-      Object.keys(tronWallet).forEach(key => {
-        createBalanceCard(key, balances[key], tronWallet[key].price, coinMetadata[key].imageURL, coinMetadata[key].fullName)
-      })
-    );
+    
+    
+    Object.keys(tronWallet).forEach(key => {
+      $("#tokenBalance").append( createBalanceCard(key, balances[key], tronWallet[key].price, coinMetadata[key].imageURL, coinMetadata[key].fullName) );
+    });
+    
     
     $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${bbstBalance.toLocaleString()} <b>BBST</b></i></div>`);
     $("#wbbsSwap").html(`<div class='col-20 p-0 text-right'><i>${wbbsBalance.toLocaleString()} <b>WBBS</b></i></div>`);
