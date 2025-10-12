@@ -176,8 +176,8 @@ const getWalletBalance = async (hexAddress) => {
     if (priceData && Array.isArray(priceData)) {
       priceData.forEach(coin => {
         tronWallet[coin.symbol] = {
-          price: coin.price,
-          usd: (coin.usd * balances[coin.symbol])
+          price: parseFloat(coin.price),
+          usd: parseFloat(coin.usd * balances[coin.symbol])
         };
       });
     }
