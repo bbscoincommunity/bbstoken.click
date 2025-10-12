@@ -179,15 +179,15 @@ const getWalletBalance = async (hexAddress) => {
 
     if (priceData && Array.isArray(priceData)) {
       for (const p of priceData) {
-        if (p.currency === "BBST" && p.market === "TRX") {
+        if (p.symbol === "BBST") { //  removed: && p.market === "TRX"
           bbstPrice.trx = parseFloat(p.price || 0);
           bbstPrice.usdValue = parseFloat(p.usd || 0) * bbstBalance;
         }
-        if (p.currency === "WBBS") {
+        if (p.symbol === "WBBS") {
           wbbsPrice.trx = parseFloat(p.price || 0);
           wbbsPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
         }
-        if (p.currency === "TRX") {
+        if (p.symbol === "TRX") {
           trxPrice.trx = parseFloat(p.price || 0);
           trxPrice.usdValue = parseFloat(p.usd || 0) * trxBalance;
         }
