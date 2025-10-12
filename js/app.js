@@ -184,8 +184,8 @@ const getWalletBalance = async (hexAddress) => {
     
     // 4. Render balances to the UI
     const createBalanceCard = (symbol, balance, price, imageSrc, title) => {
-        const trxValue = (balance * price.trx).toFixed(6);
-        const usdValue = price.usdValue.toFixed(2);
+        const trxValue = (balance * price.price).toFixed(6);
+        const usdValue = price.usd.toFixed(2);
         return `
             <div class='card mt-2 p-1 bg-white'>
                 <div class='row col-20 align-items-center'>
@@ -219,7 +219,7 @@ const getWalletBalance = async (hexAddress) => {
     
     
     Object.keys(tronWallet).forEach(key => {
-      $("#tokenBalance").append( createBalanceCard(key, balances[key], tronWallet[key].price, coinMetadata[key].imageURL, coinMetadata[key].fullName) );
+      $("#tokenBalance").append( createBalanceCard(key, balances[key], tronWallet[key], coinMetadata[key].imageURL, coinMetadata[key].fullName) );
     });
     
     
