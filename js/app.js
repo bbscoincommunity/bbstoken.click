@@ -65,11 +65,11 @@ const connectWallet = async () => {
         console.log("User's Tron wallet address:", myWallet);
         console.log("User's DApp wallet address:", dappWallet);
 
-        const connectButton = document.getElementById("connectButton");
-        if(connectButton) {
-          connectButton.innerText = 'Connected';
-          connectButton.disabled = true;
-        }
+//        const connectButton = document.getElementById("connectButton");
+//        if(connectButton) {
+//          connectButton.innerText = 'Connected';
+//          connectButton.disabled = true;
+//        }
       
         updateWalletUI(myWallet, dappWallet);
         await getWalletBalance(walletHex);
