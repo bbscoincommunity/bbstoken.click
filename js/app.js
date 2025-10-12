@@ -172,9 +172,10 @@ const getWalletBalance = async (hexAddress) => {
     }
 
     // 3. Fetch token prices
-    const priceData = await fetchData('https://www.tradecrypto.click/API?v=markets&o=price&q=BBST_1003413%20WBBS_TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB');
+    const priceData = await fetchData('https://www.tradecrypto.click/API?v=quotes&q=BBST%20WBBS%20TRX');
     let bbstPrice = { trx: 0, usdValue: 0 };
     let wbbsPrice = { trx: 0, usdValue: 0 };
+    let trxPrice = { trx: 0, usdValue: 0 };
 
     if (priceData && Array.isArray(priceData)) {
       for (const p of priceData) {
@@ -186,6 +187,11 @@ const getWalletBalance = async (hexAddress) => {
           wbbsPrice.trx = parseFloat(p.price || 0);
           wbbsPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
         }
+        if (p.currency === "TRX") {
+          trxPrice.trx = parseFloat(p.price || 0);
+          trxPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
+        }
+
       }
     }
     
