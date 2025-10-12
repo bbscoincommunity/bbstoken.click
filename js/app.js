@@ -224,8 +224,8 @@ const getWalletBalance = async (hexAddress) => {
     });
     
     
-    $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${bbstBalance.toLocaleString()} <b>BBST</b></i></div>`);
-    $("#wbbsSwap").html(`<div class='col-20 p-0 text-right'><i>${wbbsBalance.toLocaleString()} <b>WBBS</b></i></div>`);
+    $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${balances['BBST'].toLocaleString()} <b>BBST</b></i></div>`);
+    $("#wbbsSwap").html(`<div class='col-20 p-0 text-right'><i>${balances['WBBS'].toLocaleString()} <b>WBBS</b></i></div>`);
 
   } catch (error) {
     console.error("Failed to get wallet balance:", error);
