@@ -186,6 +186,7 @@ const getWalletBalance = async (hexAddress) => {
     const createBalanceCard = (symbol, balance, priced, imageSrc, title) => {
         const trxValue = (balance * priced.price).toFixed(6);
         const usdValue = priced.usd.toFixed(2);
+        const trxPrice = priced.price.toFixed(8);
         return `
             <div class='card mt-2 p-1 bg-white'>
                 <div class='row col-20 align-items-center'>
@@ -194,7 +195,7 @@ const getWalletBalance = async (hexAddress) => {
                         <div class='col-20 p-0 text-right'><i>${balance.toLocaleString()} <b>${symbol}</b></i></div>
                         <div class='col-20 text-right p-0'>
                             <i class='text-dark h8'>
-                                <b>&commat;</b> ${priced.price.toFixed(8)} <b>TRX &asymp;</b> ${trxValue} <b>TRX</b> &asymp; $${usdValue} <b>USD</b>
+                                <b>&commat;</b> ${trxPrice} <b>TRX &asymp;</b> ${trxValue} <b>TRX</b> &asymp; $${usdValue} <b>USD</b>
                             </i>
                         </div>
                     </div>
