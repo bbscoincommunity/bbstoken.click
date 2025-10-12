@@ -50,38 +50,38 @@ const connectWallet = async () => {
     console.log("TronLink extension not found!");
     return;
   }
+  else {
+    try {
+      const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
 
-  try {
-    const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+      if (res.code === 200) {
+        console.log("Successfully connected to TronLink!");
+        const tronWeb = window.tronLink.tronWeb;
+        myWallet = tronWeb.defaultAddress.base58;
+        walletHex = tronWeb.defaultAddress.hex.slice(2); // Remove '41' prefix
+        dappWallet = window.tronWeb.address.fromHex('19' + walletHex);
 
-    if (res.code === 200) {
-      console.log("Successfully connected to TronLink!");
-      const tronWeb = window.tronLink.tronWeb;
-      myWallet = tronWeb.defaultAddress.base58;
-      walletHex = tronWeb.defaultAddress.hex.slice(2); // Remove '41' prefix
-      dappWallet = window.tronWeb.address.fromHex('19' + walletHex);
+        console.log("User's Tron wallet address:", myWallet);
+        console.log("User's DApp wallet address:", dappWallet);
 
-      console.log("User's Tron wallet address:", myWallet);
-      console.log("User's DApp wallet address:", dappWallet);
-
-      const connectButton = document.getElementById("connectButton");
-      if(connectButton) {
-        connectButton.innerText = 'Connected';
-        connectButton.disabled = true;
-      }
+        const connectButton = document.getElementById("connectButton");
+        if(connectButton) {
+          connectButton.innerText = 'Connected';
+          connectButton.disabled = true;
+        }
       
-      updateWalletUI(myWallet, dappWallet);
-      await getWalletBalance(walletHex);
-
-    } else {
-      throw new Error(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
-    }
-  } catch (error) {
-    console.error("An error occurred while connecting:", error);
-    if (error.code === 4001) {
-      alert("Connection request was rejected by the user.");
-    } else {
-      alert(`An error occurred: ${error.message}`);
+        updateWalletUI(myWallet, dappWallet);
+        await getWalletBalance(walletHex);
+      } else {
+        throw new Error(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
+      }
+    } catch (error) {
+      console.error("An error occurred while connecting:", error);
+      if (error.code === 4001) {
+        alert("Connection request was rejected by the user.");
+      } else {
+        alert(`An error occurred: ${error.message}`);
+      }
     }
   }
 };
