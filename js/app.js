@@ -219,7 +219,7 @@ const getWalletBalance = async (hexAddress) => {
     $("#tokenBalance").html(
       Object.keys(tronWallet).forEach(key => {
         createBalanceCard(key, balances[key], tronWallet[key].price, coinMetadata[key].imageURL, coinMetadata[key].fullName)
-      }
+      })
     );
     
     $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${bbstBalance.toLocaleString()} <b>BBST</b></i></div>`);
