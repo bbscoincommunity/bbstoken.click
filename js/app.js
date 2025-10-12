@@ -185,7 +185,7 @@ const getWalletBalance = async (hexAddress) => {
     // 4. Render balances to the UI
     const createBalanceCard = (symbol, balance, priced, imageSrc, title) => {
         const trxValue = (balance * priced.price).toFixed(6);
-        const usdValue = price.usd.toFixed(2);
+        const usdValue = priced.usd.toFixed(2);
         return `
             <div class='card mt-2 p-1 bg-white'>
                 <div class='row col-20 align-items-center'>
