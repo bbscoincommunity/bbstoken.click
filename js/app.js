@@ -189,7 +189,7 @@ const getWalletBalance = async (hexAddress) => {
         }
         if (p.currency === "TRX") {
           trxPrice.trx = parseFloat(p.price || 0);
-          trxPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
+          trxPrice.usdValue = parseFloat(p.usd || 0) * trxBalance;
         }
 
       }
