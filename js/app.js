@@ -134,7 +134,7 @@ const updateWalletUI = (base58Address, dAppAddress) => {
         // 3. ATTACH the function to the button's 'click' event.
         // This tells the browser: "When loginButton is clicked, EXECUTE the connectWallet function."
         // Notice we pass 'connectWallet' (the reference), NOT 'connectWallet()' (the result of running it).
-        loginButton.addEventListener('click', connectWallet);
+        loginButton.addEventListener('click', connectWallet());
   }
 };
 
