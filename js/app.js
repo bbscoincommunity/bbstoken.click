@@ -129,7 +129,15 @@ const updateWalletUI = (base58Address, dAppAddress) => {
           <i class="fas fa-sign-in-alt"></i> Connect TronLink
         </button>
       </div>`;
+    
+    const connectButton = document.getElementById('connectButton');
+    if (connectButton) {
+      connectButton.addEventListener('click', connectWallet);
+    } else {
+      console.error("Could not find the connect button after creating it.");
+    }
   }
+  
 };
 
 
@@ -331,9 +339,8 @@ const TokenSwap = async () => {
 $(document).ready(() => {
     // Initial check for wallet
     updateWalletUI(); 
-    document.getElementById('connectButton').addEventListener('click', () => connectWallet);
-
-  
+//    document.getElementById('connectButton').addEventListener('click', () => connectWallet);
+ 
     // Refresh balance periodically if wallet is connected
     setInterval(() => {
         if (window.tronLink && walletHex) {
