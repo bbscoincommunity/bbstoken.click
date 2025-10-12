@@ -219,6 +219,7 @@ const getWalletBalance = async (hexAddress) => {
     
     
     Object.keys(tronWallet).forEach(key => {
+      alert(key + balances[key] + tronWallet[key] + coinMetadata[key].imageURL + coinMetadata[key].fullName);
       $("#tokenBalance").append( createBalanceCard(key, balances[key], tronWallet[key], coinMetadata[key].imageURL, coinMetadata[key].fullName) );
     });
     
