@@ -65,11 +65,11 @@ const connectWallet = async () => {
         console.log("User's Tron wallet address:", myWallet);
         console.log("User's DApp wallet address:", dappWallet);
 
-//        const connectButton = document.getElementById("connectButton");
-//        if(connectButton) {
-//          connectButton.innerText = 'Connected';
-//          connectButton.disabled = true;
-//        }
+        const connectButton = document.getElementById("connectButton");
+        if(connectButton) {
+          connectButton.innerText = 'Connected';
+          connectButton.disabled = true;
+        }
       
         updateWalletUI(myWallet, dappWallet);
         await getWalletBalance(walletHex);
@@ -125,16 +125,16 @@ const updateWalletUI = (base58Address, dAppAddress) => {
           Where you may wrap your BBS as BBST for use on the Tron network.<hr>
           Login/Register using Tronlink. Tronlink must be open/unlocked.
         </div>
-        <button id="connectButton" type="button" class="btn btn-primary p-3">
+        <button id="connectButton" type="button" class="btn btn-primary p-3" onClick="connectButton">
           <i class="fas fa-sign-in-alt"></i> Connect TronLink
         </button>
       </div>`;
 
-        const loginButton = document.getElementById('connectButton');
+//        const loginButton = document.getElementById('connectButton');
         // 3. ATTACH the function to the button's 'click' event.
         // This tells the browser: "When loginButton is clicked, EXECUTE the connectWallet function."
         // Notice we pass 'connectWallet' (the reference), NOT 'connectWallet()' (the result of running it).
-        loginButton.addEventListener('click', () => connectWallet);
+//        loginButton.addEventListener('click', () => connectWallet);
   }
 };
 
