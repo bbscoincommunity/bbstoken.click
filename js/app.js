@@ -45,6 +45,7 @@ const fetchData = async (url) => {
  * Connects to the user's TronLink wallet.
  */
 const connectWallet = async () => {
+  alert("connectWallet");
   if (!window.tronLink) {
     alert("Please install the TronLink wallet extension to connect.");
     console.log("TronLink extension not found!");
