@@ -172,8 +172,8 @@ const getWalletBalance = async (hexAddress) => {
 
     // 3. Fetch token prices
     const priceData = await fetchData('https://www.tradecrypto.click/API?v=quotes&q=BBST%20WBBS%20TRX');
+    let tronWallet = {};
     if (priceData && Array.isArray(priceData)) {
-      let tronWallet = {};
       priceData.forEach(coin => {
         tronWallet[coin.symbol] = {
           price: coin.price,
