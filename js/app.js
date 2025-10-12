@@ -194,7 +194,7 @@ const getWalletBalance = async (hexAddress) => {
                         <div class='col-20 p-0 text-right'><i>${balance.toLocaleString()} <b>${symbol}</b></i></div>
                         <div class='col-20 text-right p-0'>
                             <i class='text-dark h8'>
-                                <b>&commat;</b> ${price.trx.toFixed(8)} <b>TRX &asymp;</b> ${trxValue} <b>TRX</b> &asymp; $${usdValue} <b>USD</b>
+                                <b>&commat;</b> ${price.price.toFixed(8)} <b>TRX &asymp;</b> ${trxValue} <b>TRX</b> &asymp; $${usdValue} <b>USD</b>
                             </i>
                         </div>
                     </div>
@@ -220,6 +220,7 @@ const getWalletBalance = async (hexAddress) => {
     
     Object.keys(tronWallet).forEach(key => {
       alert(key + balances[key] + tronWallet[key] + coinMetadata[key].imageURL + coinMetadata[key].fullName);
+            TRX   2.845684         [object Object]          undefined                   Tron
       $("#tokenBalance").append( createBalanceCard(key, balances[key], tronWallet[key], coinMetadata[key].imageURL, coinMetadata[key].fullName) );
     });
     
