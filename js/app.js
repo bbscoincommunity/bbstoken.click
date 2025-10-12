@@ -125,7 +125,7 @@ const updateWalletUI = (base58Address, dAppAddress) => {
           Where you may wrap your BBS as BBST for use on the Tron network.<hr>
           Login/Register using Tronlink. Tronlink must be open/unlocked.
         </div>
-        <button id="connectButton" type="button" class="btn btn-primary p-3" onClick="connectWallet">
+        <button id="connectButton" type="button" class="btn btn-primary p-3" onClick="connectWallet()">
           <i class="fas fa-sign-in-alt"></i> Connect TronLink
         </button>
       </div>`;
