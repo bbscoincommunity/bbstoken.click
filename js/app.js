@@ -128,7 +128,7 @@ const updateWalletUI = (base58Address, dAppAddress) => {
           <i class="fas fa-sign-in-alt"></i> Connect TronLink
         </button>
       </div>`;
-      document.getElementById('connectButton').addEventListener('click', connectWallet);
+      document.getElementById('connectButton').addEventListener('click', connectWallet());
   }
 };
 
