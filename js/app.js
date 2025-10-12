@@ -132,7 +132,7 @@ const updateWalletUI = (base58Address, dAppAddress) => {
     
     const connectButton = document.getElementById('connectButton');
     if (connectButton) {
-      connectButton.addEventListener('click', connectWallet);
+      connectButton.addEventListener('click', alert("connectWallet"));
     } else {
       console.error("Could not find the connect button after creating it.");
     }
