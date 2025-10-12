@@ -151,14 +151,13 @@ const getWalletBalance = async (hexAddress) => {
     }
 
     // 2. Parse token balances from the result
-    let trxBalance = window.tronWeb.fromSun(result.balance || 0);
-    let bbstBalance = 0;
-    let wbbsBalance = 0;
+    let balances = {};
+    balances['TRX'] = window.tronWeb.fromSun(result.balance || 0);
 
     if (result.assetV2) {
         for (const asset of result.assetV2) {
             if (asset.key === BBST_TOKEN_ID) {
-                bbstBalance = asset.value / 1000;
+                balances['BBST'] = asset.value / 1000;
             }
         }
     }
@@ -166,33 +165,21 @@ const getWalletBalance = async (hexAddress) => {
     if (result.trc20) {
         for (const token of result.trc20) {
             if (token[WBBS_CONTRACT_ID]) {
-                wbbsBalance = token[WBBS_CONTRACT_ID] / 1000;
+                balances['WBBS'] = token[WBBS_CONTRACT_ID] / 1000;
             }
         }
     }
 
     // 3. Fetch token prices
     const priceData = await fetchData('https://www.tradecrypto.click/API?v=quotes&q=BBST%20WBBS%20TRX');
-    let bbstPrice = { trx: 0, usdValue: 0 };
-    let wbbsPrice = { trx: 0, usdValue: 0 };
-    let trxPrice = { trx: 0, usdValue: 0 };
-
     if (priceData && Array.isArray(priceData)) {
-      for (const p of priceData) {
-        if (p.symbol === "BBST") { //  removed: && p.market === "TRX"
-          bbstPrice.trx = parseFloat(p.price || 0);
-          bbstPrice.usdValue = parseFloat(p.usd || 0) * bbstBalance;
-        }
-        if (p.symbol === "WBBS") {
-          wbbsPrice.trx = parseFloat(p.price || 0);
-          wbbsPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
-        }
-        if (p.symbol === "TRX") {
-          trxPrice.trx = parseFloat(p.price || 0);
-          trxPrice.usdValue = parseFloat(p.usd || 0) * trxBalance;
-        }
-
-      }
+      let tronWallet = {};
+      priceData.forEach(coin => {
+        tronWallet[coin.symbol] = {
+          price: coin.price,
+          usd: (coin.usd * balances[coin.symbol])
+        };
+      });
     }
     
     // 4. Render balances to the UI
@@ -216,7 +203,7 @@ const getWalletBalance = async (hexAddress) => {
     };
 
     $("#tokenBalance").html(
-        createBalanceCard('TRX', trxBalance, { trx: 1, usdValue: 0 }, 'https://static.tronscan.org/production/logo/trx.png', 'Tron') +
+        createBalanceCard('TRX', trxBalance, trxPrice, 'https://static.tronscan.org/production/logo/trx.png', 'Tron') +
         createBalanceCard('BBST', bbstBalance, bbstPrice, '/images/bbstokenSQwhite.png', 'BBSToken') +
         createBalanceCard('WBBS', wbbsBalance, wbbsPrice, '/images/wrappedbbstokenSQwhite.png', 'Wrapped BBSToken')
     );
