@@ -1,324 +1,350 @@
-console.info('\nWelcome to the BBSToken Platform!\n\nThis DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\nMore information is available on https://www.bbscoin.org.\n\nComing Soon! Our own micro DEX.\n');
-let mymsg=null, mywallet=null, DAppWallet=null, walletHEX=null, account=null;
-let appLoaded=0, mylocal=0, i=0;
-const contractID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
-const tokenID = "1003413";
-let isBBST=null, isWBBS=null, isHolding=null, isExtra=null, isTRX=null, isWTRX=null;
-let trc10price=0, trc20price=0, trc10calc=0, trc20calc=0, bbst=0, wbbs=0;
-let trc10usd=0.00, trc20usd=0.00;
+/**
+ * BBSToken Platform DApp
+ *
+ * This script handles wallet connection, balance fetching, and token swaps
+ * for the BBSToken ecosystem on the Tron network.
+ *
+ * Refactored for modern JavaScript (ES6+) syntax.
+ */
 
+console.info(
+  '\nWelcome to the BBSToken Platform!\n\n' +
+  'This DApp allows you to deposit BBSCoin(BBS) and convert it to BBSToken(BBST) to use on the Tron network and exchanges like Bololex. ' +
+  'You may also convert BBST to Wrapped BBSToken(WBBS). All conversions may be reversible. \n\n' +
+  'More information is available on https://www.bbscoin.org.\n\n' +
+  'Coming Soon! Our own micro DEX.\n'
+);
+
+// --- Configuration and Constants ---
+const WBBS_CONTRACT_ID = "TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB";
+const BBST_TOKEN_ID = "1003413";
+
+// --- Global State Variables ---
+let myWallet = null;
+let dappWallet = null;
+let walletHex = null;
+
+// --- Helper Functions ---
+
+/**
+ * A simple utility for handling API requests using the Fetch API.
+ * @param {string} url The URL to fetch.
+ * @returns {Promise<object>} The JSON response data.
+ */
+const fetchData = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  return response.json();
+};
+
+// --- Core Application Logic ---
+
+/**
+ * Connects to the user's TronLink wallet.
+ */
 const connectWallet = async () => {
-    // First, check if the tronLink object exists on the window
-    if (window.tronLink) {
-      try {
-        // Make the request to connect to the user's wallet
-        const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
+  if (!window.tronLink) {
+    alert("Please install the TronLink wallet extension to connect.");
+    console.log("TronLink extension not found!");
+    return;
+  }
 
-        // Check if the connection was successful (code 200)
-        if (res.code === 200) {
-          console.log("Successfully connected to TronLink!");
-          
-          // tronLink.tronWeb is now available and contains user info
-          mywallet = window.tronLink.tronWeb.defaultAddress.base58;
-          walletHEX = window.tronLink.tronWeb.defaultAddress.hex;
-          walletHEX = walletHEX.slice(2);
-          DAppWallet = window.tronWeb.address.fromHex('19'+walletHEX);
+  try {
+    const res = await window.tronLink.request({ method: 'tron_requestAccounts' });
 
-          console.log("User's Tron wallet address:", mywallet);
-          console.log("User's DApp wallet address:", DAppWallet);
-          console.log("User's wallet Hex address:", walletHEX);
-//          walletAddressP.innerText = `Connected: ${mywallet}`;
-          connectButton.innerText = 'Connected';
-          connectButton.disabled = true;
-            getWalletAddress(mywallet, DAppWallet, walletHEX);
-        } else {
-          // Handle cases where connection was not fully successful
-          console.error("Connection request returned an error:", res);
-          alert(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
-        }
-      } catch (error) {
-        // This block catches errors, including when the user rejects the request.
-        console.error("An error occurred while connecting:", error);
-        if (error.code === 4001) {
-            alert("Connection request was rejected by the user.");
-        } else {
-            alert(`An error occurred: ${error.message}`);
-        }
+    if (res.code === 200) {
+      console.log("Successfully connected to TronLink!");
+      const tronWeb = window.tronLink.tronWeb;
+      myWallet = tronWeb.defaultAddress.base58;
+      walletHex = tronWeb.defaultAddress.hex.slice(2); // Remove '41' prefix
+      dappWallet = window.tronWeb.address.fromHex('19' + walletHex);
+
+      console.log("User's Tron wallet address:", myWallet);
+      console.log("User's DApp wallet address:", dappWallet);
+
+      const connectButton = document.getElementById("connectButton");
+      if(connectButton) {
+        connectButton.innerText = 'Connected';
+        connectButton.disabled = true;
       }
+      
+      updateWalletUI(myWallet, dappWallet);
+      await getWalletBalance(walletHex);
+
     } else {
-      // If tronLink is not found, the user doesn't have the extension.
-      console.log("TronLink extension not found!");
-      alert("Please install the TronLink wallet extension to connect.");
-      // Optionally, provide a link to the TronLink website
-      // window.location.href = 'https://www.tronlink.org/';
+      throw new Error(`Failed to connect. Code: ${res.code}, Message: ${res.message}`);
     }
-  };
+  } catch (error) {
+    console.error("An error occurred while connecting:", error);
+    if (error.code === 4001) {
+      alert("Connection request was rejected by the user.");
+    } else {
+      alert(`An error occurred: ${error.message}`);
+    }
+  }
+};
 
-    function getWalletAddress(mywallet, DAppWallet, walletHEX) {
-//        if ('tronWeb' in window && 'base58' in window.tronWeb.defaultAddress && mywallet){
-        if (window.tronLink && mywallet) {
-//          mywallet = window.tronWeb.defaultAddress.base58;
+/**
+ * Updates the UI with wallet address information or shows the login prompt.
+ * @param {string} base58Address The user's base58 Tron address.
+ * @param {string} dAppAddress The user's DApp-specific address.
+ */
+const updateWalletUI = (base58Address, dAppAddress) => {
+  const tronitElement = document.getElementById("tronit");
+  if (base58Address) {
+    tronitElement.innerHTML = `
+      <i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='${base58Address}'>
+        <b><i class='fas fa-wallet'></i> ${base58Address}</b>
+      </i><br>
+      <i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='Recorded as: ${dAppAddress}'>
+        <b><i class='fas fa-file-medical-alt'></i> ${dAppAddress}</b>
+      </i><br>&nbsp;<br>`;
+    
+    document.getElementById("bbs").innerHTML = `
+      <div class="justify-content-center">
+        <div id="loginErrorMsg" class="card alert alert-warning">
+          Welcome! You only need to unlock your BBSCoin address if you plan to <strong>DEPOSIT</strong> BBSCoin (BBS) into the platform.
+        </div><br>
+        <button type="button" class="btn btn-info p-4 mb-3" id="unlockBbsButton">Unlock BBSCoin Address</button>
+      </div>`;
+    
+    // Add event listener directly
+    document.getElementById('unlockBbsButton').addEventListener('click', () => BBSCoin(base58Address));
 
-          if (mywallet == false) { document.getElementById("tronit").innerHTML = "&#128274; Seems like Tronlink may still be locked, please unlock it to be able to login."; }
-          else {
-            document.getElementById("tronit").innerHTML = "<!-- i class='fa fa-at'>:</i --> <!-- b> Address:</b><hr --><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='" + mywallet + "'><!-- text-nowrap --><b><i class='fas fa-wallet'></i> " + mywallet + "</b></i><br><i class='text-dark text-monospace pb-3 h7' data-toggle='tooltip' data-placement='top' title='Recorded as: " + DAppWallet + "'><!-- text-nowrap --><b><i class='fas fa-file-medical-alt'></i> " + DAppWallet + "</b></i><br>&nbsp;<br><!-- b><i class='fa fa-coins'></i>Tokens:</b><hr -->";
-//            $("#tokenBalance").append("<b class='text-danger'>Refreshing wallet...</b>");
-            getWalletBalance(walletHEX);
+    $("#nav-bbstoken, #nav-bbscoin").removeClass('d-none');
+    $("#nav-bbstoken-tab").removeClass('disabled');
 
-            document.getElementById("bbs").innerHTML = "<div class=\"justify-content-center\"><div id=\"loginErrorMsg\" class=\"card alert alert-warning hide\">Welcome! Please note that if you <b>WILL NOT DEPOSIT BBSCoin(BBS)</b> into the platform, you do NOT need to unlock this feature.</div><br><button type=\"button\" class=\"btn btn-info p-4 mb-3\" onclick=\"BBSCoin('"+mywallet+"')\">Unlock BBSCoin Address</button><br>&nbsp;<br><div id=\"loginErrorMsg\" class=\"card alert alert-success hide\">When unlocking, Tronlink will ask to sign your unique DApp string that acts like your password to BBSCoin.<div><div>";
-            $("#nav-bbstoken").removeClass('d-none');
-            $("#nav-bbscoin").removeClass('d-none');
-            $("#nav-bbstoken-tab").removeClass('disabled');
-//                $("#nav-bbscoin-tab").removeClass('disabled');
-          }
-        }
-        else {
-          document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button id=\"connectButton\" type=\"button\" class=\"btn btn-primary p-3\" onclick=\"connectWallet()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
-//        document.getElementById("tronit").innerHTML = "<div class=\"row justify-content-center p-5\"><div class=\"col-20 pb-3 text-center\"><b>Welcome to the BBSToken Platform!</b><br>Where you may wrap your BBS as BBST for use on the Tron network.<hr>Login/Register using Tronlink. Tronlink must be open/unlocked.</div><button id=\"connectButton\" type=\"button\" class=\"btn btn-primary p-3\" onclick=\"getWalletAddress()\"><i class=\"fas fa-sign-in-alt\"></i> TronLink</button><div class=\"col-20 text-center\"><hr>You may also login using email & password:</div><div class=\"row col-20 justify-content-center text-center py-3 d-none d-md-block\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div><div class=\"row col-20 justify-content-center py-3 d-block d-md-none\"><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myLogin\"><b>[ <i class=\"fas fa-sign-in-alt\"></i> Login ]</b></a></div><div class=\"col-20 text-center pt-3\"><a data-toggle=\"modal\" data-target=\"#myRegister\"><b>[ <i class=\"fas fa-user-plus\"></i> Register ]</b></a></div></div></div>";
-//                $('#myLogin').modal('show');
-        }
+  } else {
+    tronitElement.innerHTML = `
+      <div class="row justify-content-center p-5">
+        <div class="col-20 pb-3 text-center">
+          <b>Welcome to the BBSToken Platform!</b><br>
+          Where you may wrap your BBS as BBST for use on the Tron network.<hr>
+          Login/Register using Tronlink. Tronlink must be open/unlocked.
+        </div>
+        <button id="connectButton" type="button" class="btn btn-primary p-3">
+          <i class="fas fa-sign-in-alt"></i> Connect TronLink
+        </button>
+      </div>`;
+      document.getElementById('connectButton').addEventListener('click', connectWallet);
+  }
+};
 
+
+/**
+ * Fetches and displays the user's token balances.
+ * @param {string} hexAddress The user's wallet address in hex format (without '41').
+ */
+const getWalletBalance = async (hexAddress) => {
+  if (!hexAddress) return;
+
+  try {
+    // 1. Fetch account data from Trongrid
+    const accountData = await fetchData(`https://api.trongrid.io/v1/accounts/41${hexAddress}`);
+    const result = accountData.data[0];
+
+    if (!result) {
+      $("#tokenBalance").html("<p>No account data found. Your wallet might be new.</p>");
+      return;
     }
 
-    function getWalletBalance(walletHEX) {
+    // 2. Parse token balances from the result
+    let trxBalance = window.tronWeb.fromSun(result.balance || 0);
+    let bbstBalance = 0;
+    let wbbsBalance = 0;
 
-      isBBST = "";
-      isWBBS = "";
-      bbst = 0;
-      wbbs = 0;
-//              window.setTimeout(function(){
-             $.ajax({
-              url: 'https://api.trongrid.io/v1/accounts/41' + walletHEX,
-              dataType: 'json',
-              cache: 'false'
-            }).done(function(result){
-            result = result.data[0];
-
-
-            if (result) {
-              isTRX = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + window.tronWeb.fromSun(result.balance) + " TRX'><i class='text-dark'>" + window.tronWeb.fromSun(result.balance) + " <b>TRX</b></i></div>";
-              for (i = 0; i < result.assetV2.length; i++) {
-                if (result.assetV2[i].key == tokenID) { bbst = (result.assetV2[i].value / 1000); 
-                  isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst.toLocaleString() + " <b>BBST</b></i></div>";
-                }
-              }
-              if (!isBBST) { 
-                isBBST = "<div class='col-20 p-0 text-right' data-toggle='tooltip' data-placement='top' title='Balance: " + bbst.toLocaleString() + " BBST'><i class='text-dark'>" + bbst + " <b>BBST</b></i></div>";
-              }
-
-              for (i = 0; i < result.trc20.length; i++) {
-                if (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB) { wbbs = (result.trc20[i].TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB / 1000); 
-                  isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'>" + wbbs.toLocaleString() + " <b>WBBS</b></i></div>";
-                }
-                else if (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th) { locality = (result.trc20[i].TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th / 100000000); 
-                  isLOCAL  = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'>" + locality.toLocaleString() + " <b>LOCAL</b></i></div>";
-                }
-                else if (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD) { sunquail = (result.trc20[i].TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD / 1000000000000000000); 
-                  isSUNQUAIL = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + sunquail.toLocaleString() + " SUNQUAIL'>" + sunquail.toLocaleString() + " <b>SUNQUAIL</b></i></div>";
-                }
-                else if (result.trc20[i].TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR) { wtrx = (result.trc20[i].TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR / 1000000); 
-                  isWTRX = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wtrx.toLocaleString() + " WTRX'>" + wtrx.toLocaleString() + " <b>WTRX</b></i></div>";
-                }
-                else { continue; }
-              }
-              if (!isWBBS) { 
-                isWBBS = "<div class='col-20 p-0 text-right'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='Balance: " + wbbs.toLocaleString() + " WBBS'>" + wbbs + " <b>WBBS</b></i></div>";
-              }
-
-              $.ajax({
-//                  url: 'https://www.tradecrypto.click/API?v=markets&o=price&q=BBST+WBBS',
-              url: 'https://www.tradecrypto.click/API?v=markets&o=price&q=BBST_1003413%20WBBS_TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB',
-              dataType: 'json',
-              cache: 'false'
-            }).done(function(price){
-                if (price && price.length > 4) {
-//              if (price != "null") && (price.length > 0) {
-//                    if (price[0].currency == "BBST") { trc10price = Number(price[0].price).toFixed(6); }
-//                    if (price[0].currency == "WBBS") { trc20price = Number(price[0].price).toFixed(6); }
-/*
-                if (price[0].currency == "BBST") { trc10price = Number(price[0].ask) + Number(price[0].bid); trc10price = Number(trc10price / 2).toFixed(6); }
-                if (price[0].currency == "WBBS") { trc20price = Number(price[0].price).toFixed(6); }
-
-                if (price[1]) {
-                  if (price[1].currency == "BBST") { trc10price = Number(price[0].ask) + Number(price[0].bid); trc10price = Number(trc10price / 2).toFixed(6); }
-                  if (price[1].currency == "WBBS") { trc20price = Number(price[1].price).toFixed(6); }
-                }
-*/
-                for (var p = 0; p < price.length; p++) {
-                  if (price[p].currency == "BBST" && price[p].market == "TRX") { 
-                    //trc10price = Number(price[p].ask) + Number(price[p].bid); trc10price = Number(trc10price / 2).toFixed(8);
-                    trc10price = Number(price[p].price).toFixed(8);
-                    trc10usd = Number(price[p].usd * bbst).toFixed(6);
-                  }
-                  if (price[p].currency == "WBBS") {
-                    trc20price = Number(price[p].price).toFixed(8);
-                    trc20usd = Number(price[p].usd * wbbs).toFixed(6);
-                  }
-                }
-
-                if (trc10price) {trc10calc=Number(trc10price * bbst).toFixed(6);}
-                if (trc20price) {trc20calc=Number(trc20price * wbbs).toFixed(6);}
-              }
-//              if (!appLoaded) { $("#tokenBalance").empty(); }
-
-// &times; " + trc10price + " TRX<br> | &times; " + trc20price + " TRX<br>
-              $("#tokenBalance").html(
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='https://static.tronscan.org/production/logo/trx.png' data-toggle='tooltip' data-placement='top' title='Tron'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isTRX+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b>&asymp;$"+ trc10usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='https://static.tronscan.org/production/upload/logo/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR.png' data-toggle='tooltip' data-placement='top' title='Wrapped TRX'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWTRX+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>WTRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/bbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isBBST+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc10price + " TRX'><b>&commat;</b>" + trc10price + " <b>TRX &asymp;</b>" + trc10calc + " <b>TRX</b>&asymp;$"+ trc10usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/TM91JWyKnxcn9uNQwkciLwT2CboBCDE9QD.png' data-toggle='tooltip' data-placement='top' title='SunQuail'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isSUNQUAIL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>" +
-              "<div class='card mt-2 p-1 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='35px' src='/images/TRTpeTYQm5mxjjiwpBhmAHt43ib5s5J4th.png' data-toggle='tooltip' data-placement='top' title='Locality'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isLOCAL+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'><b>&commat;</b>" + trc20price + " <b>TRX &asymp;</b>" + trc20calc + " <b>TRX</b>&asymp;$"+ trc20usd +" <b>USD</b></i>&nbsp;</div></div></div></div>"
-            );
-//              $("#tokenBalance").append("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><img width='40px' src='/images/wrappedbbstokenSQwhite.png' data-toggle='tooltip' data-placement='top' title='BBSToken'></div><div class='col-16 text-monospace text-nowrap h7 p-0'>"+isWBBS+"<div class='col-20 text-right p-0'><i class='text-dark h8' data-toggle='tooltip' data-placement='top' title='" + trc20price + " TRX'>&commat;" + trc20price + " TRX &asymp;" + trc20calc + " <b>TRX</b> &asymp;$"+ trc20usd +"</i></div></div></div></div>");
-              $("#bbstSwap").html(isBBST);
-              $("#wbbsSwap").html(isWBBS);
-
-              $.ajax({
-                  url: 'https://platform.bbstoken.click/API',
-                dataType: 'json',
-                cache: 'false',
-                data: { airdrops: mywallet },
-                success: function (air) {
-                    $("#tokenBalance").prepend("<div class='card mt-3 p-2 bg-white'><div class='row col-20'><div class='col-4 m-0 p-0'><b><i class='fas fa-parachute-box fa-3x text-info' title='Total Airdrops Received on " + air.result.txs + " transactions: " + air.result.bbst + " BBST'></i></b></div><div class='col-16 text-monospace text-left h7 p-0'>Airdrops: A total of <b>"+air.result.bbst+" BBST</b> were air dropped to your Tron wallet on <b>" + air.result.txs + "</b> transactions.</i></div></div></div>");
-                }
-            
-              });
-
-            });
-
-
-
-//                  if (isExtra) { $("#tokenExtra").append(isExtra); }
-
+    if (result.assetV2) {
+        for (const asset of result.assetV2) {
+            if (asset.key === BBST_TOKEN_ID) {
+                bbstBalance = asset.value / 1000;
             }
-            else {
-              $("#tokenBalance").html("<div class='card mt-3'><div class='row mt-3 mb-5'><div class='col-4 m-0 p-0'><img width='63px' src='https://coin.top/production/upload/logo/1003413.png?t=1602782798355' data-toggle='tooltip' data-placement='top' title='Wrapped BBSToken'></div><div class='col-16 text-monospace text-nowrap'><div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='0 BBST'>0 <b>BBST</b></i></div><div class='col-20'><i class='text-dark' data-toggle='tooltip' data-placement='top' title='0 WBBS'>0 <b>WBBS</b></i></div></div></div></div>");
-            } // if result
-            });
-//              },100);
-
-    appLoaded=1;
+        }
+    }
+    
+    if (result.trc20) {
+        for (const token of result.trc20) {
+            if (token[WBBS_CONTRACT_ID]) {
+                wbbsBalance = token[WBBS_CONTRACT_ID] / 1000;
+            }
+        }
     }
 
+    // 3. Fetch token prices
+    const priceData = await fetchData('https://www.tradecrypto.click/API?v=markets&o=price&q=BBST_1003413%20WBBS_TB3CjdHfkraU7MJLSQESYPY4U2CMKXi3LB');
+    let bbstPrice = { trx: 0, usdValue: 0 };
+    let wbbsPrice = { trx: 0, usdValue: 0 };
 
-
-  function BBSCoin(mywallet) {
-          $.ajax({
-              url: 'https://platform.bbstoken.click/API',
-              dataType: 'json',
-              cache: 'false',
-              data: { address: mywallet },
-              success: function (wallet) {
-              console.log(wallet);
-              if (wallet.code == 7) {
-                $("#bbs").prepend("<p><i class='fa fa-donate'></i> Please sign/accept the [ Signature Request ] to login...</p><br>");
-                    // wallet.result.id + window.tronWeb.defaultAddress.hex
-                  const signedtxn = tronWeb.trx.signMessageV2("BBSToken DApp login, sign the verification code: " + wallet.result.code).then(output => {
-                  $.ajax({
-                  url: 'https://platform.bbstoken.click/API',
-                  dataType: 'json',
-                  cache: 'false',
-                  data: { sign: output, id: wallet.result.id },
-                  success: function (sign) {
-                    $("#bbs").html("<i class='fa fa-donate'></i> Deposit Address<hr><span onclick=\"javascript:navigator.clipboard.writeText('" + sign.result.address + "').then(function () { alert('" + sign.result.address + " | This BBSCoin address was copied, paste it where you needed.') })\">" + sign.result.address + "</span>").fadeIn;
-                    if (!sign.result.bbstx) { $("#bbsbalance").append("Hi! I wasn't able to find any transactions for you. If you had sent any, please wait a little longer as it has to be confirmed on the BBSCoin blockchain first for the platform to see it."); }
-                    else { $("#bbsbalance").append("You have circulated " + sign.result.tron.toLocaleString() + "  BBST, and returned " + sign.result.balance.toLocaleString() + " BBST.");  }
-                  }});
-                });
-              }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Request failed!");
-                console.log("Status: " + textStatus);
-                console.log("Error: " + errorThrown);
-                console.log("Response Text: " + jqXHR.responseText);
-              }
-          });
-    }
-
-
-    async function TokenSwap() {
-      var token = document.getElementById("swapToken").elements.namedItem("tokenSelect").value;
-      var amount = document.getElementById("swapToken").elements.namedItem("inputTokens").value;
-
-    $("input[name='inputTokens']").attr("disabled", true);
-    $("input[name='inputTokens']").val('');
-    $('input:radio[name="tokenSelect"]').prop('checked', false);
-
-      if (!token) {alert("Please select an action")};
-      if (!amount) {alert("Please enter an amount")};
-      amount.replace(/[^0-9.]/g,'');
-
-      if (token && amount) {
-
-        try {
-
-          amount *= 1000;
-          let instance = await tronWeb.contract().at(contractID);
-          if (token == "wbbs") { let res = await instance.withdraw(amount).send(); }
-          else {
-            let res = await instance.deposit().send({feeLimit:10000000,callValue:0,tokenValue:amount,tokenId:1003413,shouldPollResponse:true});
-            console.log(res);
-          } // Fee changed from 2trx to 5 trx. Added log(res)
-
-        } catch (error) {
-          console.log(error);
+    if (priceData && Array.isArray(priceData)) {
+      for (const p of priceData) {
+        if (p.currency === "BBST" && p.market === "TRX") {
+          bbstPrice.trx = parseFloat(p.price || 0);
+          bbstPrice.usdValue = parseFloat(p.usd || 0) * bbstBalance;
+        }
+        if (p.currency === "WBBS") {
+          wbbsPrice.trx = parseFloat(p.price || 0);
+          wbbsPrice.usdValue = parseFloat(p.usd || 0) * wbbsBalance;
         }
       }
+    }
+    
+    // 4. Render balances to the UI
+    const createBalanceCard = (symbol, balance, price, imageSrc, title) => {
+        const trxValue = (balance * price.trx).toFixed(6);
+        const usdValue = price.usdValue.toFixed(2);
+        return `
+            <div class='card mt-2 p-1 bg-white'>
+                <div class='row col-20 align-items-center'>
+                    <div class='col-4 m-0 p-0'><img width='35px' src='${imageSrc}' data-toggle='tooltip' title='${title}'></div>
+                    <div class='col-16 text-monospace text-nowrap h7 p-0'>
+                        <div class='col-20 p-0 text-right'><i>${balance.toLocaleString()} <b>${symbol}</b></i></div>
+                        <div class='col-20 text-right p-0'>
+                            <i class='text-dark h8'>
+                                <b>&commat;</b> ${price.trx.toFixed(8)} <b>TRX &asymp;</b> ${trxValue} <b>TRX</b> &asymp; $${usdValue} <b>USD</b>
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    };
 
+    $("#tokenBalance").html(
+        createBalanceCard('TRX', trxBalance, { trx: 1, usdValue: 0 }, 'https://static.tronscan.org/production/logo/trx.png', 'Tron') +
+        createBalanceCard('BBST', bbstBalance, bbstPrice, '/images/bbstokenSQwhite.png', 'BBSToken') +
+        createBalanceCard('WBBS', wbbsBalance, wbbsPrice, '/images/wrappedbbstokenSQwhite.png', 'Wrapped BBSToken')
+    );
+    
+    $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${bbstBalance.toLocaleString()} <b>BBST</b></i></div>`);
+    $("#wbbsSwap").html(`<div class='col-20 p-0 text-right'><i>${wbbsBalance.toLocaleString()} <b>WBBS</b></i></div>`);
+
+  } catch (error) {
+    console.error("Failed to get wallet balance:", error);
+    $("#tokenBalance").html("<p class='text-danger'>Error fetching wallet balance. Please try again later.</p>");
+  }
+};
+
+
+/**
+ * Handles the process of unlocking a BBSCoin deposit address.
+ * @param {string} tronAddress The user's Tron wallet address.
+ */
+const BBSCoin = async (tronAddress) => {
+  try {
+    $("#bbs").prepend("<p><i class='fa fa-spinner fa-spin'></i> Requesting signature to unlock your BBSCoin deposit address...</p>");
+
+    // 1. Get a unique code from the server
+    const walletData = await fetchData(`https://platform.bbstoken.click/API?address=${tronAddress}`);
+    if (walletData.code !== 7) {
+      throw new Error("Failed to get verification code from the server.");
+    }
+    
+    const { id, code } = walletData.result;
+    
+    // 2. Ask user to sign the message
+    const messageToSign = `BBSToken DApp login, sign the verification code: ${code}`;
+    const signedMessage = await tronWeb.trx.signMessageV2(messageToSign);
+    
+    // 3. Send the signature back to the server for verification
+    const signData = await fetchData(`https://platform.bbstoken.click/API?sign=${signedMessage}&id=${id}`);
+    
+    // 4. Display the deposit address
+    const depositAddress = signData.result.address;
+    $("#bbs").html(
+      `<h6><i class='fa fa-donate'></i> Your BBSCoin Deposit Address</h6><hr>` +
+      `<div class='alert alert-info' style='cursor:pointer;' onclick="navigator.clipboard.writeText('${depositAddress}').then(() => alert('Address copied to clipboard!'))">` +
+      `<strong>${depositAddress}</strong><br><small>(Click to copy)</small></div>`
+    );
+
+  } catch (error) {
+    console.error("BBSCoin unlock failed:", error);
+    $("#bbs").html(`<div class='alert alert-danger'>${error.message}</div>`);
+  }
+};
+
+/**
+ * Executes the token swap between BBST and WBBS.
+ */
+const TokenSwap = async () => {
+    const swapForm = document.getElementById("swapToken");
+    const token = swapForm.elements.namedItem("tokenSelect").value;
+    let amountStr = swapForm.elements.namedItem("inputTokens").value;
+
+    // Disable inputs during processing
+    $("input[name='inputTokens']").prop('disabled', true);
+    $("#btnSwap").prop('disabled', true).addClass('btn-muted');
+
+    if (!token) {
+        alert("Please select whether to deposit or withdraw.");
+        return;
+    }
+    if (!amountStr || isNaN(amountStr) || Number(amountStr) <= 0) {
+        alert("Please enter a valid amount.");
+        return;
     }
 
-function showTransaction() {
-document.getElementById("transactionAlert").innerHTML("Please wait a moment while your balance updates.");
-document.getElementById("transactionAlert").css("display", "block");
-}
+    try {
+        const amount = Number(amountStr) * 1000; // Adjust for token decimals
+        const instance = await tronWeb.contract().at(WBBS_CONTRACT_ID);
 
-function btnEnable(){
-$("#btnSwap").attr("disabled", false);
-$("#btnSwap").removeClass('btn-muted');
-}
-
-$( document ).ready(function() {
-  getWalletAddress();
-  $("#connectButton").on('click', connectWallet);
-    
-//var accountInterval = setInterval(function() {
-//  if ('tronWeb' in window) {
-//    if (window.tronLink && mywallet !== null) {
-//      connectWallet();
-//    }
-//  }
-//}, 100);
-
-      var accountInterval = setInterval(function() {
-        if (window.tronLink && walletHEX !== null) { getWalletBalance(walletHEX); }
-      }, 30000);
-
-  $("#btnSwap").click(function(){
-    $("#btnSwap").attr("disabled", true);
-    $("#btnSwap").addClass('btn-muted');
-    TokenSwap();
-  return false;
-  }); 
-
-  $('input:radio[name="tokenSelect"]').change(
-    function(){
-      if (this.checked) { $("input[name='inputTokens']").attr("disabled", false); }
-  });
-
-  $("input[name='inputTokens']").keyup(function(event){
-
-        if (document.getElementById("swapToken").elements.namedItem("inputTokens").value > 0) {
-          $("#btnSwap").attr("disabled", false);
-          $("#btnSwap").removeClass('btn-muted');
+        let transaction;
+        if (token === "wbbs") { // Withdraw WBBS (burn) to get BBST (TRC10)
+            console.log(`Withdrawing ${amount} WBBS...`);
+            transaction = await instance.withdraw(amount).send();
+        } else { // Deposit BBST (TRC10) to get WBBS (mint)
+            console.log(`Depositing ${amount} BBST...`);
+            transaction = await instance.deposit().send({
+                feeLimit: 10_000_000, // 10 TRX
+                callValue: 0,
+                tokenValue: amount,
+                tokenId: BBST_TOKEN_ID,
+                shouldPollResponse: true
+            });
         }
-        else {
-          $("#btnSwap").attr("disabled", true);
-          $("#btnSwap").addClass('btn-muted');
-        event.preventDefault();
+        console.log("Transaction sent:", transaction);
+        alert("Transaction submitted! Please wait for confirmation.");
+        // Clear input after successful submission
+        $("input[name='inputTokens']").val('');
+
+    } catch (error) {
+        console.error("Token swap failed:", error);
+        alert(`Transaction failed: ${error.message || 'See console for details.'}`);
+    } finally {
+        // Re-enable inputs regardless of outcome
+        $('input:radio[name="tokenSelect"]:checked').prop('checked', false);
+        $("input[name='inputTokens']").prop('disabled', true).val('');
+        $("#btnSwap").prop('disabled', true).addClass('btn-muted');
+    }
+};
+
+// --- Event Listeners and Initialization ---
+
+$(document).ready(() => {
+    // Initial check for wallet
+    updateWalletUI(); 
+
+    // Refresh balance periodically if wallet is connected
+    setInterval(() => {
+        if (window.tronLink && walletHex) {
+            getWalletBalance(walletHex);
         }
+    }, 30000); // 30 seconds
 
-  });
+    // Swap button logic
+    $("#btnSwap").click((e) => {
+        e.preventDefault();
+        TokenSwap();
+    });
 
+    // Enable amount input only when a token is selected
+    $('input:radio[name="tokenSelect"]').change(function() {
+        $("input[name='inputTokens']").prop('disabled', !this.checked);
+    });
+
+    // Enable swap button only when amount is valid
+    $("input[name='inputTokens']").on('keyup', function() {
+        const amount = $(this).val();
+        const isValid = amount && !isNaN(amount) && Number(amount) > 0;
+        $("#btnSwap").prop('disabled', !isValid).toggleClass('btn-muted', !isValid);
+    });
 });
