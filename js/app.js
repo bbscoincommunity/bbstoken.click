@@ -129,12 +129,6 @@ const updateWalletUI = (base58Address, dAppAddress) => {
           <i class="fas fa-sign-in-alt"></i> Connect TronLink
         </button>
       </div>`;
-
-//        const loginButton = document.getElementById('connectButton');
-        // 3. ATTACH the function to the button's 'click' event.
-        // This tells the browser: "When loginButton is clicked, EXECUTE the connectWallet function."
-        // Notice we pass 'connectWallet' (the reference), NOT 'connectWallet()' (the result of running it).
-//        loginButton.addEventListener('click', () => connectWallet);
   }
 };
 
@@ -337,7 +331,9 @@ const TokenSwap = async () => {
 $(document).ready(() => {
     // Initial check for wallet
     updateWalletUI(); 
+    document.getElementById('connectButton').addEventListener('click', () => connectWallet);
 
+  
     // Refresh balance periodically if wallet is connected
     setInterval(() => {
         if (window.tronLink && walletHex) {
