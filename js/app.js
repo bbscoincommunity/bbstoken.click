@@ -202,10 +202,24 @@ const getWalletBalance = async (hexAddress) => {
             </div>`;
     };
 
+    const coinMetadata = {
+    TRX: {
+        fullName: 'Tron',
+        imageUrl: 'https://static.tronscan.org/production/logo/trx.png'
+    },
+    BBST: {
+        fullName: 'BBSToken',
+        imageUrl: 'https://bbstoken.click/images/bbstokenSQwhite.png' // Add your image path
+    },
+    WBBS: {
+        fullName: 'Wrapped BBS',
+        imageUrl: 'https://bbstoken.click/images/wrappedbbstokenSQwhite.png' // Add your image path
+    }
+    };
     $("#tokenBalance").html(
-        createBalanceCard('TRX', trxBalance, trxPrice, 'https://static.tronscan.org/production/logo/trx.png', 'Tron') +
-        createBalanceCard('BBST', bbstBalance, bbstPrice, '/images/bbstokenSQwhite.png', 'BBSToken') +
-        createBalanceCard('WBBS', wbbsBalance, wbbsPrice, '/images/wrappedbbstokenSQwhite.png', 'Wrapped BBSToken')
+      Object.keys(tronWallet).forEach(key => {
+        createBalanceCard(key, balances[key], tronWallet[key].price, coinMetadata[key].imageURL, coinMetadata[key].fullName)
+      }
     );
     
     $("#bbstSwap").html(`<div class='col-20 p-0 text-right'><i>${bbstBalance.toLocaleString()} <b>BBST</b></i></div>`);
